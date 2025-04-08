@@ -1,0 +1,244 @@
+/* 🔁 Establecer box-sizing global */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+
+/* Contenedor principal */
+.section-container {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 50vw;
+  height: 100vh;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 0;
+  gap: 0;
+  z-index: 1;
+}
+
+/* Secciones curvas */
+.section {
+  position:relative;
+  width: 40%;
+  height: 100%;
+  clip-path: ellipse(80% 100% at 100% 50%);
+  -webkit-clip-path: ellipse(80% 100% at 100% 50%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.3s ease;
+  color: white;
+  font-weight: bold;
+  font-size: 1.5rem;
+  margin-left: -110px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+}
+
+.section:hover {
+  transform: scale(1.05);
+}
+
+.section img {
+  width: 30px;
+  height: 100px;
+ 
+  margin-top: 10px;
+  
+}
+
+.age img {
+  width: 20px;
+  height: auto;
+  
+}
+
+/* Si usas una clase específica para el personaje */
+.blinking-character {
+  max-width: 250px;
+  margin: 15px auto;
+}
+
+.blinking-character img {
+  width: 100px;
+  height: auto;
+  transition: all 0.3s ease;
+}
+
+
+p.age {
+  color: #ebdbd9;
+}
+
+/* Colores */
+.age0 {
+  background: linear-gradient(137.64deg, #fff88f 2%, #eef12b 97%);
+}
+.age1 {
+  background: linear-gradient(137.64deg, #86dd7e 2%, #88c261 97%);
+}
+.age2 {
+  background: linear-gradient(137.64deg, 	#1c76b3 2%, 	#1376a3 97%);
+}
+.age3 {
+  background: linear-gradient(137.64deg, #a590f1  2%, #3c4592 97%);
+}
+
+.hover-text {
+  position: absolute;
+  top: 70%; /* ajústalo según tu layout */
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #ffffff;
+  padding: 10px;
+  border-radius: 7px;
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+  z-index: 2;
+  background-color: rgba(0, 0, 0, 0.13);
+  box-shadow: 0 2px 8px rgba(201, 15, 15, 0.2);
+}
+@media (max-width: 1024px) {
+  .section {
+    width: 45%;
+    margin-left: -80px;
+  }
+}
+
+@media (max-width: 780px) {
+  .section-container {
+    position: relative;
+    width: 100%;
+    height: auto;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 0;
+    gap: 1.5rem;
+  }
+
+  .section {
+    width: 85%;
+    padding: 1rem;
+    border-radius: 24px;
+    clip-path: none;
+    height: auto;
+    margin: 0 auto;
+    font-size: 1.2rem;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+    position: relative;
+  }
+
+  .age {
+    font-size: 1.3rem;
+    margin: 0.5rem 0;
+    text-align: center;
+    color: #fff;
+  }
+
+  .blinking-character {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 0.5rem;
+  }
+
+  .blinking-character img {
+    width: 75px;
+    height: auto;
+  }
+
+  .hover-text {
+    position: static;
+    transform: none;
+    background-color: transparent;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #fff;
+    text-align: center;
+    margin-top: 0.4rem;
+  }
+}
+
+
+
+@media (max-width: 480px) {
+  .section-container {
+    position: relative;
+    width: 100%;
+    height: auto;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem 0;
+    gap: 1.5rem;
+  }
+
+  .section {
+    width: 90%;
+    padding: 1rem;
+    border-radius: 40px;
+    clip-path: none;
+    height: auto;
+    margin: 0 auto;
+    font-size: 1rem;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    position: relative;
+  }
+
+  .age {
+    font-size: 1.1rem;
+    margin: 0.5rem 0;
+    text-align: center;
+    color: #fff; /* o el color que prefieras */
+  }
+
+  .blinking-character {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 0.5rem;
+  }
+
+  .blinking-character img {
+    width: 60px;
+    height: auto;
+  }
+
+  .hover-text {
+    position: static;
+    transform: none;
+    background-color: transparent;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #fff;
+    text-align: center;
+    margin-top: 0.3rem;
+  }
+}
+

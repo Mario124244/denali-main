@@ -1,0 +1,85 @@
+.container2 {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+/* Estilo base para TODAS las áreas */
+.area1, .area2, .area3, .area4, .area5, .area6, .area7, .area8, .area9 {
+  display: flex;
+  align-items: center;        /* Centra verticalmente */
+  justify-content: center;    /* Centra horizontalmente */
+  gap: 3rem;                  /* Espacio entre texto e imagen */
+  padding: 1rem;
+  min-height: 700px;
+}
+
+
+/* Curva solo desde area2 en adelante */
+.area2,
+.area3,
+.area4,
+.area5,
+.area6,
+.area7,
+.area8,
+.area9 {
+  border-top-left-radius: 100% 80px;
+  border-top-right-radius: 100% 80px;
+  margin-top: -40px;
+}
+
+/* Colores por sección */
+.area1 { background-color: #9CDACE; }
+.area2 { background-color: #F3A2B5; }
+.area3 { background-color: #FDE262; }
+.area4 { background-color:rgb(180, 102, 196); }
+.area5 { background-color: #7066C2; }
+.area6 { background-color: #B89ED8; }
+.area7 { background-color: #ADC7EF; }
+.area8 { background-color: #F3A2B5; }
+.area9 { background-color: #FDE262; }
+
+/* Imagen */
+.imagen img {
+  width: 500px;
+  height: auto;
+  
+}
+
+.texto {
+  max-width: 600px;
+  text-align: left;
+  color: #FFFFFF;
+}
+
+.texto h1 {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.texto p {
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+/* Responsive para móvil */
+@media (max-width: 768px) {
+  .area1,
+  .area2,
+  .area3,
+  .area4,
+  .area5,
+  .area6,
+  .area7,
+  .area8,
+  .area9 {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .imagen img {
+    width: 150px;
+  }
+}

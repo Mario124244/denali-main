@@ -1,0 +1,258 @@
+@font-face {
+  font-family: 'Candela';
+  src: url('../../assets/fonts/Candela.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* 🧭 Navbar general */
+.navbar {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #FEF7F0;
+  padding: 10px 30px;
+  width: fit-content;
+  margin: 30px auto;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 40px;
+}
+
+/* 🏷️ Logo */
+.logo {
+  font-size: 24px;
+  display: flex;
+  align-items: baseline;
+  font-weight: bold;
+  font-family: 'Baloo 2', sans-serif;
+}
+
+.letter {
+  font-family: 'Candela', sans-serif;
+  transition: color 0.3s, transform 0.2s;
+  letter-spacing: 8px;
+}
+
+.letter:hover {
+  transform: scale(1.2);
+}
+
+.letter1 { color: #be9bd6 }
+.letter2 { color: #f5a0b5 }
+.letter3 { color: #f8e56f }
+.letter4 { color: #99dacd }
+.letter5 { color: #b1c5ed }
+.letter6 { color: #795fbe }
+
+.sub {
+  font-size: 14px;
+  margin-left: 5px;
+  color: #888;
+  font-weight: 400;
+}
+
+/* 🔗 Menú links */
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 40px;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links li a,
+.nav-links li button {
+  width: 100%;
+  display: block;
+  text-align: center;
+  font-size: 16px;
+  padding: 10px;
+  text-decoration: none;
+  color: black;
+  font-weight: 500;
+  transition: color 0.3s ease;
+  margin: 0.5rem 0;
+}
+
+.nav-links li a:hover:not(.btn-cita) {
+  color: #eb7413;
+}
+
+/* 📞 Teléfono */
+.contact .phone {
+  font-weight: 500;
+  color: #c93636;
+  margin-left: 20px;
+}
+
+/* 🔘 Botones base */
+.btn {
+  padding: 8px 18px;
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+/* 📅 Botón de cita */
+.btn-cita {
+  background: linear-gradient(135deg, #b1c5ed, #99dacd); /* celeste a verde suave */
+  color: #fff;
+  font-weight: 600;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 25px;
+  box-shadow: 0 4px 8px rgba(153, 218, 205, 0.4);
+  transition: all 0.3s ease;
+}
+
+.btn-cita:hover {
+  background: linear-gradient(135deg, #88c2e1, #7fc3b2); /* tono más fuerte */
+  transform: scale(1.05);
+  box-shadow: 0 6px 12px rgba(136, 194, 225, 0.5);
+}
+
+
+/* ✅ Botón de agendar */
+.btn-appointment {
+  background: #cfe4be;
+  color: white;
+}
+
+.btn-appointment:hover {
+  background: #b4d2a8;
+  transform: scale(1.05);
+}
+
+/* ❌ Botón cerrar sesión */
+
+
+
+.btn-appointment2 {
+  background: linear-gradient(135deg, #fca5a5, #f87171); /* tonos coral-rosados */
+  color: #fff;
+  font-weight: 600;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 25px;
+  box-shadow: 0 4px 8px rgba(248, 113, 113, 0.4);
+  transition: all 0.3s ease;
+}
+
+.btn-appointment2:hover {
+  background: linear-gradient(135deg, #ef4444, #f87171); /* más fuerte al pasar el cursor */
+  transform: scale(1.05);
+  box-shadow: 0 6px 12px rgba(239, 68, 68, 0.5);
+}
+
+
+/* ☰ Icono hamburguesa */
+.menu-icon {
+  display: none;
+  font-size: 24px;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 8px;
+  transition: background 0.3s;
+}
+
+.menu-icon:hover {
+  background: #ffe4e1;
+}
+
+.logo-image {
+  width: 24px;
+  height: auto;
+  vertical-align: middle;
+  margin: 0 2px;
+}
+
+/* 📱 Responsive - Tablets */
+@media (max-width: 768px) {
+  .menu-icon {
+    display: block;
+    color: #f56c6c;
+  }
+
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 60px;
+    right: 40px;
+    background: #fff;
+    width: 200px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(255, 26, 26, 0.1);
+    padding: 10px 0;
+    z-index: 999;
+  }
+
+  .nav-links.active {
+    display: flex;
+  }
+
+  .nav-links li {
+    text-align: center;
+    margin: 10px 0;
+  }
+
+  .btn {
+    width: 90%;
+    margin: 5px auto;
+  }
+}
+
+/* 📱 Responsive - Celulares */
+@media (max-width: 480px) {
+  .navbar {
+    flex-direction: column;
+    padding: 12px 16px;
+    border-radius: 20px;
+    gap: 10px;
+    width: 90%;
+    margin: 20px auto;
+  }
+
+  .logo {
+    font-size: 20px;
+    justify-content: center;
+  }
+
+  .sub {
+    font-size: 12px;
+  }
+
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    padding: 10px 0;
+    position: static;
+  }
+
+  .nav-links.active {
+    display: flex;
+  }
+
+  .nav-links li {
+    text-align: center;
+    margin: 10px 0;
+  }
+
+  .btn {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+  }
+
+  .contact .phone {
+    display: none;
+  }
+}
