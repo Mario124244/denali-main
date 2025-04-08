@@ -21,7 +21,7 @@ const AgendarCita: React.FC = () => {
 
     try {
       // Paso 1: Crear o recuperar paciente
-      const pacienteRes = await fetch('http://localhost:4000/api/pacientes', {
+      const pacienteRes = await fetch(`${process.env.REACT_APP_API_URL}/pacientes`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -34,7 +34,7 @@ const AgendarCita: React.FC = () => {
       const paciente = await pacienteRes.json();
 
       // Paso 2: Agendar la cita asociada al usuario logueado
-      const citaRes = await fetch('http://localhost:4000/api/citas', {
+      const citaRes = await fetch(`${process.env.REACT_APP_API_URL}/citas`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

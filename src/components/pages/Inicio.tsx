@@ -13,8 +13,14 @@ const tarjetas = [
   { img: `${process.env.PUBLIC_URL}/img/IMG_2900.jpg`},
   { img: `${process.env.PUBLIC_URL}/img/IMG_3118.jpg` },
   { img: `${process.env.PUBLIC_URL}/img/IMG_3182.jpg` },
-  { img: `${process.env.PUBLIC_URL}/img/Kantis-closed.png` },
-  { img: `${process.env.PUBLIC_URL}/img/Bichito-closed.png` },
+  { img: `${process.env.PUBLIC_URL}/img/IMG_3221.jpg` },
+  { img: `${process.env.PUBLIC_URL}/img/IMG_3230.jpg` },
+  { img: `${process.env.PUBLIC_URL}/img/IMG_3393.jpg` },
+  { img: `${process.env.PUBLIC_URL}/img/IMG_3425.jpg` },
+  { img: `${process.env.PUBLIC_URL}/img/IMG_3444.jpg` },
+  { img: `${process.env.PUBLIC_URL}/img/IMG_3462.jpg` },
+  { img: `${process.env.PUBLIC_URL}/img/IMG_3528.jpg` },
+  { img: `${process.env.PUBLIC_URL}/img/IMG_3529.jpg` },
 ];
 
 const Inicio: React.FC = () => {

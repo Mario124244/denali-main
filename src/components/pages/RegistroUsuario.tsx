@@ -9,7 +9,8 @@ const RegistroUsuario: React.FC = () => {
     e.preventDefault(); // evita que recargue la página
 
     try {
-      const res = await fetch("http://localhost:4000/api/usuarios/register", {
+      const res = await fetch(`${process.env.REACT_APP_API_URL}/usuarios/register`, {
+
         method: "POST",
         headers: {
           "Content-Type": "application/json"

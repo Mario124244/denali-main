@@ -24,7 +24,8 @@ const LoginUsuario: React.FC = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post<LoginResponse>('http://localhost:4000/api/auth/login', {
+        const response = await axios.post<LoginResponse>(`${process.env.REACT_APP_API_URL}/auth/login`, {
+
         correo,
         contrasena,
       });

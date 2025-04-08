@@ -22,7 +22,7 @@ const MisCitas: React.FC = () => {
   useEffect(() => {
     const fetchCitas = async () => {
       try {
-        const res = await fetch('http://localhost:4000/api/citas', {
+        const res = await fetch(`${process.env.REACT_APP_API_URL}/citas`, {
           headers: {
             'Authorization': `Bearer ${localStorage.getItem('token')}`,
           },
