@@ -1,4 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import './MisCitas.css';
+
+
 
 interface Cita {
   _id: string;
@@ -28,10 +31,7 @@ const MisCitas: React.FC = () => {
           },
         });
 
-        if (!res.ok) {
-          throw new Error('Error al obtener citas');
-        }
-
+        if (!res.ok) throw new Error('Error al obtener citas');
         const data = await res.json();
         setCitas(data);
       } catch (err: any) {
@@ -42,36 +42,51 @@ const MisCitas: React.FC = () => {
     fetchCitas();
   }, []);
 
+  const formatFecha = (fechaStr: string) => {
+    const meses = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
+    const [year, month, day] = fechaStr.split('-');
+    return `${parseInt(day)} ${meses[parseInt(month) - 1]}`;
+  };
+
+  const citasPorFecha = citas.reduce((acc, cita) => {
+    const fecha = cita.fecha;
+    if (!acc[fecha]) acc[fecha] = [];
+    acc[fecha].push(cita);
+    return acc;
+  }, {} as { [key: string]: Cita[] });
+
   return (
-    <div style={{ padding: '2rem' }}>
-      <h2>Mis Citas</h2>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
+    <div className="contenedor-citas">
+      <h2 className="titulo-citas">Mi Calendario de Citas</h2>
+      {error && <p className="error-citas">{error}</p>}
 
       {citas.length === 0 ? (
-        <p>No tienes citas registradas.</p>
+        <p className="mensaje-vacio">No tienes citas registradas.</p>
       ) : (
-        <table style={{ width: '100%', borderCollapse: 'collapse' }}>
-          <thead>
-            <tr>
-              <th>Paciente</th>
-              <th>Correo</th>
-              <th>Fecha</th>
-              <th>Hora</th>
-              <th>Terapeuta</th>
-            </tr>
-          </thead>
-          <tbody>
-            {citas.map((cita) => (
-              <tr key={cita._id}>
-                <td>{cita.paciente?.nombre}</td>
-                <td>{cita.paciente?.correo}</td>
-                <td>{cita.fecha}</td>
-                <td>{cita.hora}</td>
-                <td>{cita.terapeuta}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        <div className="grid-citas">
+          {Object.entries(citasPorFecha).map(([fecha, citasDia]) => (
+            <div key={fecha} className="card-dia">
+              <div className="fecha-cita">
+                <h3 className="fecha-titulo">
+                  <span className="fecha-etiqueta">{formatFecha(fecha)}</span>
+                </h3>
+              </div>
+              <div className="citas-dia">
+                {citasDia.map((cita) => (
+                  <div key={cita._id} className="card-cita">
+                    <div className="info-cita">
+                      <div className="hora-cita">⏰ {cita.hora}</div>
+                      <div className="detalle-cita">
+                        <div>👤 Paciente: {cita.paciente?.nombre}</div>
+                        <div>👨Terapeuta:  {cita.terapeuta}</div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
       )}
     </div>
   );
