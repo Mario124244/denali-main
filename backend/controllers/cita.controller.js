@@ -3,14 +3,17 @@ const Cita = require('../models/cita.model');
 // 👉 Crear cita
 const crearCita = async (req, res) => {
   try {
-    const { paciente, fecha, hora, terapeuta } = req.body;
+    const { paciente, fecha, hora, terapeuta, estado, grupo } = req.body;
+    console.log('Grupo recibido del frontend:', grupo); // <- AQUÍ
 
     const nuevaCita = new Cita({
       paciente,
       usuario: req.usuario.id,
       fecha,
       hora,
-      terapeuta
+      terapeuta,
+      estado: estado || 'pendiente', // por si no lo mandan
+      grupo
     });
 
     const guardada = await nuevaCita.save();
@@ -19,6 +22,7 @@ const crearCita = async (req, res) => {
     res.status(500).json({ mensaje: 'Error al crear cita', error });
   }
 };
+
 
 // ✅ CORRECTO: Obtener citas del usuario logueado
 const obtenerCitas = async (req, res) => {

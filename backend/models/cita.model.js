@@ -18,10 +18,19 @@ const citaSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  usuario: { // 👈 el usuario logueado que agenda la cita
+  usuario: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Usuario',
     required: true
+  },
+  estado: {
+    type: String,
+    enum: ['pendiente', 'finalizada', 'cancelada'],
+    default: 'pendiente'
+  },
+  grupo: {
+    nombre: { type: String },
+    imagen: { type: String }
   }
 });
 
