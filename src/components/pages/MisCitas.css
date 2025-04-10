@@ -1,201 +1,197 @@
+.contenedor-citas {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
 
+.titulo-citas {
+  color: var(--color-texto);
+  text-align: center;
+  margin-bottom: 2rem;
+}
 
+.contenedor-calendario {
+  background: white;
+  border-radius: 16px;
+  padding: 1rem;
+  box-shadow: 0 4px 12px rgba(204, 152, 225, 0.85);
+}
 
-:root {
-    --color-primario: #f5a0b5;
-    --color-secundario: #b1c5ed;
-    --color-fondo: #fef9f8;
-    --color-texto:rgb(0, 0, 0);
-    --color-error: #d63031;
-    --fuente-principal: 'Comic Neue', cursive, sans-serif;
-  }
-  
-  body {
-    font-family: var(--fuente-principal);
-    background-color: var(--color-fondo);
-    margin: 0;
-    padding: 0;
-  }
-  
-  .card-cita:hover {
-    transform: scale(1.02);
-    transition: transform 0.2s ease-in-out;
-  }
-  .contenedor-citas {
-    padding: 2rem;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-  
-  .titulo-citas {
-    color: var(--color-texto);
-    text-align: center;
-    font-size: 2.5rem;
-    margin-bottom: 2rem;
-  }
-  
-  .error-citas {
-    color: var(--color-error);
-    text-align: center;
-    font-weight: bold;
-  }
-  
-  .mensaje-vacio {
-    color: #636e72;
-    text-align: center;
-    font-size: 1.2rem;
-  }
-  .grupo-cita {
-    margin-top: 0.5rem;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 0.9rem;
-  }
-  
-  .icono-grupo {
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    object-fit: cover;
-  }
-  
-  
-  .grid-citas {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 2rem;
-  }
-  
-  .card-dia {
-    background: #fff;
-    border-radius: 16px;
-    padding: 1.5rem;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.05);
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-  }
-  
-  .fecha-cita {
-    border-bottom: 3px dashed var(--color-primario);
-    padding-bottom: 0.5rem;
-    margin-bottom: 1rem;
-  }
-  
-  .fecha-titulo {
-    font-size: 1.6rem;
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-    color: var(--color-primario);
-  }
-  
-  .fecha-etiqueta {
-    background-color: var(--color-primario);
-    color: #fff;
-    padding: 0.4rem 1rem;
-    border-radius: 20px;
-    font-weight: bold;
-    font-size: 1rem;
-  }
-  
-  .citas-dia {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    flex-grow: 1;
-  }
-  
-  .card-cita {
-    background: var(--color-secundario);
-    border-radius: 12px;
-    padding: 1rem;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    /* height: 120px; ❌ QUITA ESTO */
-    overflow: hidden;
-  }
-  
-  
-  .card-cita::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    width: 5px;
-    background: var(--color-primario);
-    border-radius: 5px 0 0 5px;
-  }
-  
-  .info-cita {
-    margin-left: 0.8rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 100%;
-  }
-  
-  .hora-cita {
-    font-weight: 700;
-    color: var(--color-texto);
-    font-size: 1rem;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
-  
-  .detalle-cita {
-    color: #2d3436;
-    font-size: 0.95rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.2rem;
-  }
-  .estado-cita {
-    margin-top: 0.5rem;
-  }
-  
-  .badge {
-    display: inline-block;
-    padding: 0.3rem 0.7rem;
-    border-radius: 20px;
-    font-size: 0.75rem;
-    font-weight: bold;
-    text-transform: uppercase;
-    color: white;
-  }
-  
-  .badge.pendiente {
-    background-color: #f1c40f;
-  }
-  
-  .badge.finalizada {
-    background-color: #2ecc71;
-  }
-  
-  .badge.cancelada {
-    background-color: #e74c3c;
-  }
-  
-  .grupo-cita {
-    margin-top: 0.5rem;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 0.9rem;
-  }
-  
-  .icono-grupo {
-    width: 28px;
-    height: 28px;
-    object-fit: cover;
-    border-radius: 50%;
-    display: inline-block;
-  }
-  
-  
-  
+.navegacion-mes {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding: 0 1rem;
+}
+
+.navegacion-mes button {
+  background: var(--color-primario);
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.navegacion-mes button:hover {
+  opacity: 0.9;
+}
+
+.navegacion-mes h3 {
+  margin: 0;
+  color: var(--color-texto);
+  font-size: 1.4rem;
+}
+
+.calendario-header {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+  margin-bottom: 4px;
+}
+
+.dia-header {
+  text-align: center;
+  padding: 0.8rem 0;
+  background: var(--color-fondo);
+  color: var(--color-primario);
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+}
+
+.calendario-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+  background: var(--color-secundario);
+  border: 2px solid var(--color-secundario);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.dia-calendario {
+  background: white;
+  min-height: 120px;
+  padding: 0.5rem;
+  display: flex;
+  border: 1px solid grey;
+  box-shadow: 2px 2px 5px rgba(143, 56, 175, 0.5);
+  flex-direction: column;
+}
+
+.dia-inactivo {
+  background:rgb(98, 110, 120);
+  opacity: 0.6;
+}
+
+.dia-numero {
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: var(--color-texto);
+  margin-bottom: 0.5rem;
+  text-align: right;
+}
+
+.citas-del-dia {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+/* Estilos para la cita en calendario */
+.cita-calendario {
+  background: var(--color-fondo);
+  padding: 0.5rem;
+  border-radius: 6px;
+  border-left: 4px solid var(--color-primario);
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: transform 0.1s;
+  margin-bottom: 4px;
+}
+
+.cita-hora-grupo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.cita-hora {
+  color: var(--color-primario);
+  font-weight: bold;
+  font-size: 0.85rem;
+}
+
+.grupo-info {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  max-width: 60%;
+}
+
+.icono-grupo-calendario {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.nombre-grupo {
+  font-size: 0.7rem;
+  color: #666;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cita-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+
+.cita-paciente {
+  font-weight: 500;
+  color: var(--color-texto);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 70%;
+}
+
+.cita-detalle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.cita-terapeuta {
+  font-size: 0.75rem;
+  color: #666;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 80px;
+}
+
+.cita-estado {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.cita-estado.pendiente { background: #f1c40f; }
+.cita-estado.finalizada { background: #2ecc71; }
+.cita-estado.cancelada { background: #e74c3c; }
+
+/* Resto de estilos permanecen iguales */

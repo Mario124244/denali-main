@@ -1,19 +1,24 @@
 const express = require('express');
 const router = express.Router();
 
-const verificarToken = require('../middlewares/auth.middleware'); // 👈 importa el middleware
-const { crearCita, obtenerCitas, obtenerCitasPorGrupoYFecha } = require('../controllers/cita.controller');
+const verificarToken = require('../middlewares/auth.middleware');
+const { 
+  crearCita, 
+  obtenerCitas, 
+  obtenerCitasPorGrupoYFecha,
+  obtenerCitasPorFecha // ✅ añadida aquí
+} = require('../controllers/cita.controller');
 
-
-
-
-// 👇 Solo usuarios autenticados pueden crear una cita
+// Crear una cita (requiere token)
 router.post('/citas', verificarToken, crearCita);
 
-// 👇 Obtener todas las citas (puedes proteger esto también si quieres)
-router.get('/citas', verificarToken, obtenerCitas); // ARREGLAR ERROR NO TENGO REFERENCIA DE obtenerCitas
+// Obtener citas del usuario autenticado
+router.get('/citas', verificarToken, obtenerCitas);
 
+// Obtener citas por grupo y fecha (para casos anteriores)
 router.get('/citas/grupo', obtenerCitasPorGrupoYFecha);
 
+// ✅ Nueva ruta para obtener TODAS las citas de una fecha
+router.get('/citas/fecha', obtenerCitasPorFecha);
 
 module.exports = router;

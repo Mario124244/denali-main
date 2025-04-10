@@ -16,6 +16,7 @@ const TimesGrid = styled.div`
 `;
 
 const HoraTag = styled.button<{ $seleccionado: boolean; $bloqueado?: boolean }>`
+  position:relative;
   padding: 0.5rem 0.75rem;
   background-color: ${({ $seleccionado, $bloqueado }) =>
     $bloqueado ? '#ffc9c9' : $seleccionado ? '#38d9a9' : '#d3f9d8'};
@@ -29,6 +30,32 @@ const HoraTag = styled.button<{ $seleccionado: boolean; $bloqueado?: boolean }>`
     background-color: ${({ $bloqueado }) => ($bloqueado ? '#ffc9c9' : '#63e6be')};
   }
 `;
+const Tooltip = styled.div`
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 10;
+  margin-bottom: 5px;
+  &::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: rgba(0, 0, 0, 0.8) transparent transparent transparent;
+  }
+`;
+
 
 const Title = styled.h2`
   color: #2d3748;
@@ -117,6 +144,11 @@ const Message = styled.div<{ $type?: 'success' | 'error' | 'info' }>`
 `;
 
 const AgendarCita: React.FC = () => {
+  const [hoveredHora, setHoveredHora] = useState<string | null>(null); // ✅ Aquí es correcto
+
+  const [citasGrupo, setCitasGrupo] = useState<
+    { hora: string; usuario: string; grupo?: { nombre: string } }[]>([]);
+  
   const [form, setForm] = useState({
     nombre: '',
     correo: '',
@@ -130,7 +162,8 @@ const AgendarCita: React.FC = () => {
 
   const [mensaje, setMensaje] = useState<{ texto: string; tipo: 'success' | 'error' | 'info' }>({ texto: '', tipo: 'info' });
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [citasGrupo, setCitasGrupo] = useState<{ hora: string; usuario: string }[]>([]);
+  
+
   const userId = localStorage.getItem('userId');
 
   const generarHorarios = (inicio = '08:00', fin = '19:00', intervalo = 60) => {
@@ -156,27 +189,27 @@ const AgendarCita: React.FC = () => {
   const horariosDisponibles = generarHorarios();
 
   useEffect(() => {
-    const fetchCitasGrupo = async () => {
-      if (!form.fecha || !form.grupo) return;
-
+    const fetchCitasDelDia = async () => {
+      if (!form.fecha) return;
+  
       try {
-        const res = await fetch(`${process.env.REACT_APP_API_URL}/citas/grupo?grupo=${encodeURIComponent(form.grupo)}&fecha=${form.fecha}`,{
-
+        const res = await fetch(`${process.env.REACT_APP_API_URL}/citas/fecha?fecha=${form.fecha}`, {
           headers: {
             'Authorization': `Bearer ${localStorage.getItem('token')}`
           }
         });
-
-        if (!res.ok) throw new Error('Error al obtener citas del grupo');
+  
+        if (!res.ok) throw new Error('Error al obtener citas del día');
         const data = await res.json();
-        setCitasGrupo(data);
+        setCitasGrupo(data); // ahora representa todas las citas del día
       } catch (err) {
-        console.error('Error cargando citas del grupo:', err);
+        console.error('Error cargando citas del día:', err);
       }
     };
-
-    fetchCitasGrupo();
-  }, [form.fecha, form.grupo]);
+  
+    fetchCitasDelDia();
+  }, [form.fecha]);
+  
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -293,14 +326,25 @@ const AgendarCita: React.FC = () => {
 
         <InputGroup>
           <Label>Terapeuta</Label>
-          <Input
-            type="text"
+          <select
             name="terapeuta"
             value={form.terapeuta}
             onChange={handleChange}
             required
-          />
+            style={{
+              padding: '0.75rem',
+              border: '1px solid #e2e8f0',
+              borderRadius: '6px',
+              fontSize: '1rem'
+            }}
+          >
+            <option value="">Selecciona un terapeuta</option>
+            <option value="Lic. Clara">Lic. Clara</option>
+            
+            
+          </select>
         </InputGroup>
+
 
         <InputGroup>
           <Label>Fecha</Label>
@@ -333,26 +377,49 @@ const AgendarCita: React.FC = () => {
         </InputGroup>
 
         <TimesGrid>
-          {horariosDisponibles.map((hora) => {
-            const usuariosEnHora = citasGrupo
-              .filter(cita => cita.hora === hora)
-              .map(cita => cita.usuario);
+    {/* ↓↓↓ Reemplaza desde aquí ↓↓↓ */}
+    {horariosDisponibles.map((hora) => {
+    const citasEnEsaHora = citasGrupo.filter(c => c.hora === hora);
+  
+    // Usamos una sola declaración ✅
+    const citasMismoGrupo = citasEnEsaHora.filter(c => c.grupo?.nombre === form.grupo);
+    const gruposEnEsaHora = citasEnEsaHora.map(c => c.grupo?.nombre).filter((v, i, a) => a.indexOf(v) === i);
+    const usuariosEnMismoGrupo = citasMismoGrupo.map(c => c.usuario).filter((v, i, a) => a.indexOf(v) === i);
+    const usuariosUnicos = [...new Set(citasMismoGrupo.map(c => c.usuario))];
+    
+    const horaOcupadaPorOtroGrupo = gruposEnEsaHora.some(grupo => grupo !== form.grupo);
+    const horaLlenaEnMiGrupo = usuariosEnMismoGrupo.length >= 3 && !usuariosEnMismoGrupo.includes(userId || '');
+    
+    const bloquearHora = horaOcupadaPorOtroGrupo || horaLlenaEnMiGrupo;
 
-            const esHoraLlena = usuariosEnHora.length >= 2 && !usuariosEnHora.includes(userId || '');
-
-            return (
-              <HoraTag
-                key={hora}
-                onClick={() => !esHoraLlena && setForm({ ...form, hora })}
-                $seleccionado={form.hora === hora}
-                $bloqueado={esHoraLlena}
-                disabled={esHoraLlena}
-              >
-                {hora}
-              </HoraTag>
-            );
-          })}
-        </TimesGrid>
+    return (
+      <div 
+        key={hora}
+        style={{ position: 'relative' }}
+        onMouseEnter={() => setHoveredHora(hora)}
+        onMouseLeave={() => setHoveredHora(null)}
+      >
+        <HoraTag
+          onClick={() => !bloquearHora && setForm({ ...form, hora })}
+          $seleccionado={form.hora === hora}
+          $bloqueado={bloquearHora}
+          disabled={bloquearHora}
+        >
+          {hora}
+          {hoveredHora === hora && (
+            <Tooltip>
+              {bloquearHora 
+                ? "Horario lleno" 
+                : `Asistentes: ${usuariosUnicos.length}`
+              }
+            </Tooltip>
+          )}
+        </HoraTag>
+      </div>
+    );
+  })}
+  {/* ↑↑↑ Hasta aquí ↑↑↑ */}
+</TimesGrid>
 
         <Button type="submit" disabled={isSubmitting}>
           {isSubmitting ? 'Procesando...' : 'Agendar Cita'}

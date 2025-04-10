@@ -6,24 +6,35 @@ const crearCita = async (req, res) => {
   try {
     const { paciente, fecha, hora, terapeuta, estado, grupo } = req.body;
 
-    // ✅ Paso 1: Validar si ya hay 3 usuarios distintos en esa hora y grupo
-    const citasExistentes = await Cita.find({
+    // Paso 1: Validar si esa hora ya fue usada por otro grupo
+    const citaEnOtraGrupo = await Cita.findOne({
+      fecha,
+      hora,
+      'grupo.nombre': { $ne: grupo.nombre } // grupo distinto
+    });
+
+    if (citaEnOtraGrupo) {
+      return res.status(400).json({
+        mensaje: 'Esta hora ya está ocupada por otro grupo. Elige otra hora.'
+      });
+    }
+
+    // Paso 2: Validar límite de 3 personas distintas en ese grupo y hora
+    const citasMismoGrupoHora = await Cita.find({
       fecha,
       hora,
       'grupo.nombre': grupo.nombre
     });
 
-    // Obtener IDs únicos de usuario
-    const usuariosUnicos = [...new Set(citasExistentes.map(c => c.usuario.toString()))];
+    const usuariosUnicos = [...new Set(citasMismoGrupoHora.map(c => c.usuario.toString()))];
 
-    // Si ya hay 3 diferentes y este no es uno de ellos, rechazar
     if (usuariosUnicos.length >= 3 && !usuariosUnicos.includes(req.usuario.id)) {
       return res.status(400).json({
-        mensaje: 'Ya hay 3 personas distintas agendadas para esta hora y grupo. Elige otra hora.'
+        mensaje: 'Ya hay 3 personas distintas agendadas para esta hora y grupo.'
       });
     }
 
-    // ✅ Paso 2: Crear la cita normalmente
+    // Paso 3: Guardar cita
     const nuevaCita = new Cita({
       paciente,
       usuario: req.usuario.id,
@@ -75,5 +86,20 @@ const obtenerCitasPorGrupoYFecha = async (req, res) => {
   }
 };
 
+// ✅ Obtener todas las citas de una fecha (sin importar grupo)
+const obtenerCitasPorFecha = async (req, res) => {
+  try {
+    const { fecha } = req.query;
+    if (!fecha) {
+      return res.status(400).json({ mensaje: 'La fecha es requerida' });
+    }
 
-module.exports = { crearCita, obtenerCitas, obtenerCitasPorGrupoYFecha };
+    const citas = await Cita.find({ fecha }).select('hora usuario grupo');
+    res.status(200).json(citas);
+  } catch (error) {
+    res.status(500).json({ mensaje: 'Error al obtener citas por fecha', error });
+  }
+};
+
+
+module.exports = { crearCita, obtenerCitas, obtenerCitasPorGrupoYFecha, obtenerCitasPorFecha };
