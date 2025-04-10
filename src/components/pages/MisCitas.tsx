@@ -8,6 +8,11 @@ interface Cita {
   fecha: string;
   hora: string;
   terapeuta: string;
+  estado: 'pendiente' | 'finalizada' | 'cancelada';
+  grupo: {
+    nombre: string;
+    imagen?: string; // URL o nombre de archivo
+  };
   paciente: {
     nombre: string;
     correo: string;
@@ -17,6 +22,7 @@ interface Cita {
     correo: string;
   };
 }
+
 
 const MisCitas: React.FC = () => {
   const [citas, setCitas] = useState<Cita[]>([]);
@@ -33,6 +39,7 @@ const MisCitas: React.FC = () => {
 
         if (!res.ok) throw new Error('Error al obtener citas');
         const data = await res.json();
+        console.log('Citas recibidas:', data);
         setCitas(data);
       } catch (err: any) {
         setError(err.message || 'Error de conexión');
@@ -65,6 +72,7 @@ const MisCitas: React.FC = () => {
       ) : (
         <div className="grid-citas">
           {Object.entries(citasPorFecha).map(([fecha, citasDia]) => (
+            
             <div key={fecha} className="card-dia">
               <div className="fecha-cita">
                 <h3 className="fecha-titulo">
@@ -73,15 +81,35 @@ const MisCitas: React.FC = () => {
               </div>
               <div className="citas-dia">
                 {citasDia.map((cita) => (
+                  
                   <div key={cita._id} className="card-cita">
-                    <div className="info-cita">
-                      <div className="hora-cita">⏰ {cita.hora}</div>
-                      <div className="detalle-cita">
-                        <div>👤 Paciente: {cita.paciente?.nombre}</div>
-                        <div>👨Terapeuta:  {cita.terapeuta}</div>
-                      </div>
+                  <div className="info-cita">
+                    <div className="hora-cita">⏰ {cita.hora}</div>
+                
+                    <div className="detalle-cita">
+                      <div>👤 Paciente: {cita.paciente?.nombre}</div>
+                      <div>👨 Terapeuta: {cita.terapeuta}</div>
                     </div>
+                
+                    <div className="estado-cita">
+                        <span className={`badge ${cita.estado || 'pendiente'}`}>
+                          {(cita.estado || 'pendiente').toUpperCase()}
+                        </span>
+                      </div>
+
+                
+                      <div className="grupo-cita">
+                        <img
+                          src={cita.grupo?.imagen || '/img/grupos/grupo-a.png'}
+                          alt={cita.grupo?.nombre || 'Grupo'}
+                          className="icono-grupo"
+                        />
+                        <span>{cita.grupo?.nombre || 'Sin grupo'}</span>
+                      </div>
+
                   </div>
+                </div>
+                
                 ))}
               </div>
             </div>

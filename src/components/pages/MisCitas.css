@@ -45,6 +45,21 @@
     text-align: center;
     font-size: 1.2rem;
   }
+  .grupo-cita {
+    margin-top: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+  }
+  
+  .icono-grupo {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  
   
   .grid-citas {
     display: grid;
@@ -100,9 +115,10 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: 120px;
+    /* height: 120px; ❌ QUITA ESTO */
     overflow: hidden;
   }
+  
   
   .card-cita::before {
     content: "";
@@ -139,4 +155,47 @@
     flex-direction: column;
     gap: 0.2rem;
   }
+  .estado-cita {
+    margin-top: 0.5rem;
+  }
+  
+  .badge {
+    display: inline-block;
+    padding: 0.3rem 0.7rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: white;
+  }
+  
+  .badge.pendiente {
+    background-color: #f1c40f;
+  }
+  
+  .badge.finalizada {
+    background-color: #2ecc71;
+  }
+  
+  .badge.cancelada {
+    background-color: #e74c3c;
+  }
+  
+  .grupo-cita {
+    margin-top: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+  }
+  
+  .icono-grupo {
+    width: 28px;
+    height: 28px;
+    object-fit: cover;
+    border-radius: 50%;
+    display: inline-block;
+  }
+  
+  
   

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 const Container = styled.div`
@@ -15,20 +15,20 @@ const TimesGrid = styled.div`
   gap: 0.5rem;
 `;
 
-const HoraTag = styled.button<{ $seleccionado: boolean }>`
+const HoraTag = styled.button<{ $seleccionado: boolean; $bloqueado?: boolean }>`
   padding: 0.5rem 0.75rem;
-  background-color: ${({ $seleccionado }) => ($seleccionado ? '#38d9a9' : '#d3f9d8')};
-  border: 1px solid #b2f2bb;
+  background-color: ${({ $seleccionado, $bloqueado }) =>
+    $bloqueado ? '#ffc9c9' : $seleccionado ? '#38d9a9' : '#d3f9d8'};
+  border: 1px solid ${({ $bloqueado }) => ($bloqueado ? '#fa5252' : '#b2f2bb')};
   border-radius: 20px;
   font-size: 0.9rem;
-  cursor: pointer;
+  cursor: ${({ $bloqueado }) => ($bloqueado ? 'not-allowed' : 'pointer')};
   transition: all 0.2s ease;
 
   &:hover {
-    background-color: #63e6be;
+    background-color: ${({ $bloqueado }) => ($bloqueado ? '#ffc9c9' : '#63e6be')};
   }
 `;
-
 
 const Title = styled.h2`
   color: #2d3748;
@@ -99,17 +99,17 @@ const Message = styled.div<{ $type?: 'success' | 'error' | 'info' }>`
   padding: 1rem;
   margin-bottom: 1.5rem;
   border-radius: 6px;
-  background: ${({ $type }) => 
-    $type === 'success' ? '#f0fff4' : 
-    $type === 'error' ? '#fff5f5' : 
+  background: ${({ $type }) =>
+    $type === 'success' ? '#f0fff4' :
+    $type === 'error' ? '#fff5f5' :
     '#f7fafc'};
-  color: ${({ $type }) => 
-    $type === 'success' ? '#2f855a' : 
-    $type === 'error' ? '#c53030' : 
+  color: ${({ $type }) =>
+    $type === 'success' ? '#2f855a' :
+    $type === 'error' ? '#c53030' :
     '#2d3748'};
-  border: 1px solid ${({ $type }) => 
-    $type === 'success' ? '#c6f6d5' : 
-    $type === 'error' ? '#fed7d7' : 
+  border: 1px solid ${({ $type }) =>
+    $type === 'success' ? '#c6f6d5' :
+    $type === 'error' ? '#fed7d7' :
     '#e2e8f0'};
   display: flex;
   align-items: center;
@@ -124,34 +124,61 @@ const AgendarCita: React.FC = () => {
     fecha: '',
     hora: '',
     terapeuta: '',
+    grupo: 'Grupo A',
+    estado: 'pendiente'
   });
 
   const [mensaje, setMensaje] = useState<{ texto: string; tipo: 'success' | 'error' | 'info' }>({ texto: '', tipo: 'info' });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [citasGrupo, setCitasGrupo] = useState<{ hora: string; usuario: string }[]>([]);
+  const userId = localStorage.getItem('userId');
+
   const generarHorarios = (inicio = '08:00', fin = '19:00', intervalo = 60) => {
     const horarios: string[] = [];
     const [startHour, startMin] = inicio.split(':').map(Number);
     const [endHour, endMin] = fin.split(':').map(Number);
-  
+
     let current = new Date();
     current.setHours(startHour, startMin, 0, 0);
-  
+
     const end = new Date();
     end.setHours(endHour, endMin, 0, 0);
-  
+
     while (current <= end) {
       const horastr = current.toTimeString().slice(0, 5);
       horarios.push(horastr);
       current.setMinutes(current.getMinutes() + intervalo);
     }
-  
+
     return horarios;
   };
-  
-  const horariosDisponibles = generarHorarios(); // puedes usar estado para cambiar según la fecha
-  
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const horariosDisponibles = generarHorarios();
+
+  useEffect(() => {
+    const fetchCitasGrupo = async () => {
+      if (!form.fecha || !form.grupo) return;
+
+      try {
+        const res = await fetch(`${process.env.REACT_APP_API_URL}/citas/grupo?grupo=${encodeURIComponent(form.grupo)}&fecha=${form.fecha}`,{
+
+          headers: {
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
+          }
+        });
+
+        if (!res.ok) throw new Error('Error al obtener citas del grupo');
+        const data = await res.json();
+        setCitasGrupo(data);
+      } catch (err) {
+        console.error('Error cargando citas del grupo:', err);
+      }
+    };
+
+    fetchCitasGrupo();
+  }, [form.fecha, form.grupo]);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
@@ -161,7 +188,6 @@ const AgendarCita: React.FC = () => {
     setMensaje({ texto: '', tipo: 'info' });
 
     try {
-      // Paso 1: Crear o recuperar paciente
       const pacienteRes = await fetch(`${process.env.REACT_APP_API_URL}/pacientes`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -173,10 +199,8 @@ const AgendarCita: React.FC = () => {
       });
 
       if (!pacienteRes.ok) throw new Error('Error al crear paciente');
-
       const paciente = await pacienteRes.json();
 
-      // Paso 2: Agendar la cita
       const citaRes = await fetch(`${process.env.REACT_APP_API_URL}/citas`, {
         method: 'POST',
         headers: {
@@ -187,7 +211,12 @@ const AgendarCita: React.FC = () => {
           paciente: paciente._id,
           fecha: form.fecha,
           hora: form.hora,
-          terapeuta: form.terapeuta
+          terapeuta: form.terapeuta,
+          grupo: {
+            nombre: form.grupo,
+            imagen: `/img/grupos/${form.grupo.trim().toLowerCase().replace(/\s+/g, '-')}.png`
+          },
+          estado: form.estado
         }),
       });
 
@@ -199,7 +228,9 @@ const AgendarCita: React.FC = () => {
           telefono: '',
           fecha: '',
           hora: '',
-          terapeuta: ''
+          terapeuta: '',
+          grupo: 'Grupo A',
+          estado: 'pendiente'
         });
       } else {
         throw new Error('Error al agendar cita');
@@ -207,7 +238,7 @@ const AgendarCita: React.FC = () => {
 
     } catch (error) {
       console.error('Error:', error);
-      setMensaje({ 
+      setMensaje({
         texto: error instanceof Error ? `❌ ${error.message}` : '❌ Error inesperado',
         tipo: 'error'
       });
@@ -219,7 +250,7 @@ const AgendarCita: React.FC = () => {
   return (
     <Container>
       <Title>Agendar Nueva Cita</Title>
-      
+
       {mensaje.texto && (
         <Message $type={mensaje.tipo}>
           {mensaje.texto}
@@ -282,18 +313,46 @@ const AgendarCita: React.FC = () => {
           />
         </InputGroup>
 
+        <InputGroup>
+          <Label>Grupo</Label>
+          <select
+            name="grupo"
+            value={form.grupo}
+            onChange={(e) => setForm({ ...form, grupo: e.target.value })}
+            style={{
+              padding: '0.75rem',
+              border: '1px solid #e2e8f0',
+              borderRadius: '6px',
+              fontSize: '1rem'
+            }}
+          >
+            <option value="Grupo A">Grupo A</option>
+            <option value="Grupo B">Grupo B</option>
+            <option value="Grupo C">Grupo C</option>
+          </select>
+        </InputGroup>
+
         <TimesGrid>
-            {horariosDisponibles.map((hora) => (
+          {horariosDisponibles.map((hora) => {
+            const usuariosEnHora = citasGrupo
+              .filter(cita => cita.hora === hora)
+              .map(cita => cita.usuario);
+
+            const esHoraLlena = usuariosEnHora.length >= 2 && !usuariosEnHora.includes(userId || '');
+
+            return (
               <HoraTag
                 key={hora}
-                onClick={() => setForm({ ...form, hora })}
+                onClick={() => !esHoraLlena && setForm({ ...form, hora })}
                 $seleccionado={form.hora === hora}
+                $bloqueado={esHoraLlena}
+                disabled={esHoraLlena}
               >
                 {hora}
               </HoraTag>
-            ))}
-          </TimesGrid>
-
+            );
+          })}
+        </TimesGrid>
 
         <Button type="submit" disabled={isSubmitting}>
           {isSubmitting ? 'Procesando...' : 'Agendar Cita'}
