@@ -82,7 +82,7 @@ const SectionDivider = () => {
 
           <BlinkingCharacter
             openImg={`${process.env.PUBLIC_URL}/img/Triqui.png`}
-            closedImg={`${process.env.PUBLIC_URL}/img/Triqui-closed.png`}
+            closedImg={`${process.env.PUBLIC_URL}/img/Triqui-Closed.png`}
             alt="Bebé"
             isHovered={hoveredAge === "age3"}
           />

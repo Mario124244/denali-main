@@ -30,7 +30,7 @@ const About: React.FC = () => {
           <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita sed enim nihil magni, omnis reprehenderit! Neque cum sint explicabo modi atque, vero velit repellendus ab quae laborum. Voluptatum, eaque consectetur?</p>
         </div>
         <div className="imagen">
-          <img src={`${process.env.PUBLIC_URL}/img/rompecabeza2.png`} alt="Descripción de la imagen" />
+          <img src={`${process.env.PUBLIC_URL}/img/Rompecabeza2.png`} alt="Descripción de la imagen" />
         </div>
       </div>
 
