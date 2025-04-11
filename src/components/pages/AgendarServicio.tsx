@@ -246,11 +246,12 @@ const AgendarServicio: React.FC = () => {
           hora: form.hora,
           terapeuta: form.terapeuta,
           servicio: {
-            nombre: form.servicio,
-            
+            nombre: form.servicio
           },
+          tipo: 'servicio', // ✅ MUY IMPORTANTE
           estado: form.estado
         }),
+        
       });
 
       if (citaRes.ok) {

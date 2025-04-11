@@ -249,8 +249,10 @@ const AgendarCita: React.FC = () => {
             nombre: form.grupo,
             imagen: `/img/grupos/${form.grupo.trim().toLowerCase().replace(/\s+/g, '-')}.png`
           },
+          tipo: 'grupo', // ✅ MUY IMPORTANTE
           estado: form.estado
         }),
+        
       });
 
       if (citaRes.ok) {

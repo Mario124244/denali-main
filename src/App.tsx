@@ -3,7 +3,8 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Menu from './components/layout/menu';
 import Inicio from './components/pages/Inicio';
 import About from './components/pages/About';
-import AgendarCita from './components/pages/AgendarCita';
+import AgendarCitaGrupo from './components/pages/AgendarCita';
+import AgendarCitaServicio from './components/pages/AgendarServicio';
 import './App.css';
 import Informacion from './components/pages/Informacion';
 import RegistroUsuario from './components/pages/RegistroUsuario';
@@ -21,7 +22,8 @@ const App: React.FC = () => {
             <Route path="/" element={<Inicio />} />
             <Route path="/inicio" element={<Inicio />} />
             <Route path="/about" element={<About />} />
-            <Route path="/contact" element={<AgendarCita />} />
+            <Route path="/agendar-grupo" element={<AgendarCitaGrupo />} />
+            <Route path="/agendar-servicio" element={<AgendarCitaServicio />} />
             <Route path="/informacion" element={<Informacion />} />
             <Route path="/registro" element={<RegistroUsuario />} />
             <Route path="/login" element={<LoginUsuario />} />

@@ -3,6 +3,7 @@ import "./Menu.css";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 
+
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const toggleMenu = () => setMenuOpen(!menuOpen);
@@ -11,7 +12,7 @@ const Navbar = () => {
   const isAuthenticated = !!usuario;
   const navigate = useNavigate();
   const location = useLocation();
-
+  const [showAgendarOpciones, setShowAgendarOpciones] = useState<boolean>(false);
   const rutaActual = location.pathname;
   const ocultarNavbar = ['/login', '/registro', '/recuperar'].includes(rutaActual);
 
@@ -56,7 +57,21 @@ const Navbar = () => {
         {isAuthenticated && (
           <>
             <li><Link to="/mis-citas">Mis Citas</Link></li>
-            <li><Link to="/contact" className="btn-appointment btn-cita">Agendar Cita</Link></li>
+            <li className="submenu-container">
+  <button 
+    className="btn-appointment btn-cita" 
+    onClick={() => setShowAgendarOpciones(prev => !prev)}
+  >
+    Agendar Cita ⌄
+  </button>
+  {showAgendarOpciones && (
+    <ul className="submenu">
+      <li><Link to="/agendar-grupo">Agendar Grupo</Link></li>
+      <li><Link to="/agendar-servicio">Agendar Servicio</Link></li>
+    </ul>
+  )}
+</li>
+
             <li>
               <button className="btn-appointment2" onClick={handleLogout}>
                 Cerrar sesión
