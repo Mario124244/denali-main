@@ -31,6 +31,14 @@ const citaSchema = new mongoose.Schema({
   grupo: {
     nombre: { type: String },
     imagen: { type: String }
+  },
+  servicio: {
+    nombre: { type: String }
+  },
+  tipo: {
+    type: String,
+    enum: ['grupo', 'servicio'],
+    required: true
   }
 });
 
