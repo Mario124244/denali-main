@@ -1,15 +1,26 @@
 import React, { useState } from "react";
 import "./Menu.css";
-import { Link } from "react-router-dom";
-import { useAuth } from "../../context/AuthContext"; // ✅
+import { Link, useNavigate, useLocation } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const toggleMenu = () => setMenuOpen(!menuOpen);
 
-  // ✅ Trae el usuario y logout desde el contexto
   const { usuario, logout } = useAuth();
   const isAuthenticated = !!usuario;
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const rutaActual = location.pathname;
+  const ocultarNavbar = ['/login', '/registro', '/recuperar'].includes(rutaActual);
+
+  if (ocultarNavbar) return null;
+
+  const handleLogout = () => {
+    logout();
+    navigate("/inicio");
+  };
 
   return (
     <nav className="navbar">
@@ -44,17 +55,13 @@ const Navbar = () => {
 
         {isAuthenticated && (
           <>
-          <li>
-              <Link to="/mis-citas">Mis Citas</Link>
-            </li>
+            <li><Link to="/mis-citas">Mis Citas</Link></li>
+            <li><Link to="/contact" className="btn-appointment btn-cita">Agendar Cita</Link></li>
             <li>
-              <Link to="/contact" className="btn-appointment btn-cita">Agendar Cita</Link>
+              <button className="btn-appointment2" onClick={handleLogout}>
+                Cerrar sesión
+              </button>
             </li>
-            <li>
-              <button className="btn-appointment2" onClick={logout}>Cerrar sesión</button>
-            </li>
-            
-
           </>
         )}
       </ul>

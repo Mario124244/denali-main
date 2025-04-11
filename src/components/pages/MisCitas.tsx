@@ -7,9 +7,14 @@ interface Cita {
   hora: string;
   terapeuta: string;
   estado: 'pendiente' | 'finalizada' | 'cancelada';
-  grupo: {
+  tipo: 'grupo' | 'servicio'; // ✅
+  grupo?: {
     nombre: string;
     imagen?: string;
+  };
+  servicio?: {
+    nombre: string;
+    icono?: string;
   };
   paciente: {
     nombre: string;
@@ -20,6 +25,7 @@ interface Cita {
     correo: string;
   };
 }
+
 
 const MisCitas: React.FC = () => {
   const [citas, setCitas] = useState<Cita[]>([]);
@@ -119,13 +125,20 @@ const MisCitas: React.FC = () => {
                       <div className="cita-hora-grupo">
                         <span className="cita-hora">{cita.hora}</span>
                         <div className="grupo-info">
-                          <img 
-                            src={cita.grupo?.imagen || '/img/grupos/grupo-a.png'} 
-                            alt={cita.grupo?.nombre} 
-                            className="icono-grupo-calendario" 
-                          />
-                          <span className="nombre-grupo">{cita.grupo?.nombre}</span>
+                          {cita.tipo === 'grupo' ? (
+                            <>
+                              <img 
+                                src={cita.grupo?.imagen || '/img/grupos/grupo-a.png'} 
+                                alt={cita.grupo?.nombre} 
+                                className="icono-grupo-calendario" 
+                              />
+                              <span className="nombre-grupo">{cita.grupo?.nombre}</span>
+                            </>
+                          ) : (
+                            <span className="nombre-grupo">{cita.servicio?.nombre}</span>
+                          )}
                         </div>
+
                       </div>
                       
                       <div className="cita-info">

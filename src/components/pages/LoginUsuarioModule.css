@@ -1,0 +1,20 @@
+.boton-login {
+  width: 100%;
+  padding: 14px;
+  background-color: #be9bd6;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 48px;
+}
+
+.boton-login:hover {
+  background-color: #f5a0b5;
+}
