@@ -7,7 +7,9 @@ const {
   obtenerCitas, 
   obtenerCitasPorGrupoYFecha,
   obtenerCitasPorServicioYFecha, // ✅ nueva
-  obtenerCitasPorFecha
+  obtenerCitasPorFecha,
+  actualizarEstadoCita,
+  reagendarCita
 } = require('../controllers/cita.controller');
 
 // Crear una cita (requiere token)
@@ -24,5 +26,8 @@ router.get('/citas/servicio', obtenerCitasPorServicioYFecha);
 
 // Obtener TODAS las citas de una fecha (sin importar grupo o servicio)
 router.get('/citas/fecha', obtenerCitasPorFecha);
+router.patch('/citas/:id/estado', verificarToken, actualizarEstadoCita);
+router.patch('/citas/:id/reagendar', verificarToken, reagendarCita);
+
 
 module.exports = router;

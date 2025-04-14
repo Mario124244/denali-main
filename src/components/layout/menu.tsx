@@ -62,7 +62,7 @@ const Navbar = () => {
     className="btn-appointment btn-cita" 
     onClick={() => setShowAgendarOpciones(prev => !prev)}
   >
-    Agendar Cita ⌄
+    Agendar Cita
   </button>
   {showAgendarOpciones && (
     <ul className="submenu">

@@ -144,10 +144,53 @@ const obtenerCitasPorFecha = async (req, res) => {
   }
 };
 
+const actualizarEstadoCita = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { estado } = req.body;
+
+    if (!['pendiente', 'finalizada', 'cancelada'].includes(estado)) {
+      return res.status(400).json({ mensaje: 'Estado inválido' });
+    }
+
+    const cita = await Cita.findByIdAndUpdate(id, { estado }, { new: true });
+
+    if (!cita) {
+      return res.status(404).json({ mensaje: 'Cita no encontrada' });
+    }
+
+    res.status(200).json(cita);
+  } catch (error) {
+    res.status(500).json({ mensaje: 'Error al actualizar el estado', error });
+  }
+};
+
+// PATCH: Reagendar cita (cambiar fecha/hora)
+const reagendarCita = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { fecha, hora } = req.body;
+
+    const cita = await Cita.findByIdAndUpdate(id, { fecha, hora }, { new: true });
+
+    if (!cita) {
+      return res.status(404).json({ mensaje: 'Cita no encontrada' });
+    }
+
+    res.status(200).json(cita);
+  } catch (error) {
+    res.status(500).json({ mensaje: 'Error al reagendar cita', error });
+  }
+};
+
+
+
 module.exports = {
   crearCita,
   obtenerCitas,
   obtenerCitasPorGrupoYFecha,
   obtenerCitasPorServicioYFecha,
-  obtenerCitasPorFecha
+  obtenerCitasPorFecha,
+  actualizarEstadoCita,
+  reagendarCita
 };

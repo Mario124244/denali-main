@@ -32,6 +32,8 @@ const MisCitas: React.FC = () => {
   const [error, setError] = useState('');
   const [currentMonth, setCurrentMonth] = useState(new Date());
 
+  const[modalVisible, setModalVisible] = useState(false);
+  const[citaSeleccionada, setCitaSeleccionada] = useState<Cita | null>(null);
   useEffect(() => {
     const fetchCitas = async () => {
       try {
@@ -51,6 +53,76 @@ const MisCitas: React.FC = () => {
 
     fetchCitas();
   }, []);
+
+  const abrirModal = (cita: Cita) => {
+    setCitaSeleccionada(cita);
+    setModalVisible(true);
+  };
+  const cerrarModal = () => {
+    setCitaSeleccionada(null);
+    setModalVisible(false);
+  };
+
+  const confirmarCita = async () => {
+    if (!citaSeleccionada) return;
+  
+    await fetch(`${process.env.REACT_APP_API_URL}/citas/${citaSeleccionada._id}/estado`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${localStorage.getItem('token')}`
+      },
+      body: JSON.stringify({ estado: 'finalizada' })
+    });
+  
+    cerrarModal();
+    window.location.reload();
+  };
+  
+  const cancelarCita = async () => {
+    if (!citaSeleccionada) return;
+  
+    await fetch(`${process.env.REACT_APP_API_URL}/citas/${citaSeleccionada._id}/estado`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${localStorage.getItem('token')}`
+      },
+      body: JSON.stringify({ estado: 'cancelada' })
+    });
+  
+    cerrarModal();
+    window.location.reload();
+  };
+  
+  const reagendarCita = async () => {
+    if (!citaSeleccionada) return;
+  
+    const nuevaFecha = prompt("Nueva fecha (YYYY-MM-DD):", citaSeleccionada.fecha);
+    const nuevaHora = prompt("Nueva hora (HH:mm):", citaSeleccionada.hora);
+  
+    if (nuevaFecha && nuevaHora) {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/citas/${citaSeleccionada._id}/reagendar`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${localStorage.getItem('token')}`
+        },
+        body: JSON.stringify({ fecha: nuevaFecha, hora: nuevaHora })
+      });
+  
+      if (!response.ok) {
+        const error = await response.json();
+        alert("❌ Error al reagendar: " + error.mensaje);
+      } else {
+        alert("✅ Cita reagendada con éxito");
+        cerrarModal();
+        window.location.reload();
+      }
+    }
+  };
+  
+  
 
   const citasPorFecha = useMemo(() => 
     citas.reduce((acc, cita) => {
@@ -86,7 +158,7 @@ const MisCitas: React.FC = () => {
     <div className="contenedor-citas">
       <h2 className="titulo-citas">Mi Calendario de Citas</h2>
       {error && <p className="error-citas">{error}</p>}
-
+  
       {citas.length === 0 ? (
         <p className="mensaje-vacio">No tienes citas registradas.</p>
       ) : (
@@ -94,79 +166,137 @@ const MisCitas: React.FC = () => {
           <div className="navegacion-mes">
             <button onClick={handlePrevMonth}>&lt;</button>
             <h3>
-              {currentMonth.toLocaleDateString('es-ES', { 
-                month: 'long', 
-                year: 'numeric' 
+              {currentMonth.toLocaleDateString('es-ES', {
+                month: 'long',
+                year: 'numeric'
               }).toUpperCase()}
             </h3>
             <button onClick={handleNextMonth}>&gt;</button>
           </div>
-
+  
           <div className="calendario-header">
-            {['LUN', 'MAR', 'MIÉ', 'JUE', 'VIE', 'SÁB', 'DOM'].map(dia => (
-              <div key={dia} className="dia-header">{dia}</div>
+            {['LUN', 'MAR', 'MIÉ', 'JUE', 'VIE', 'SÁB', 'DOM'].map((dia) => (
+              <div key={dia} className="dia-header">
+                {dia}
+              </div>
             ))}
           </div>
-
+  
           <div className="calendario-grid">
             {calendarDays.map((dia, index) => {
               const fechaStr = `${dia.getFullYear()}-${(dia.getMonth() + 1)
-                .toString().padStart(2, '0')}-${dia.getDate()
-                .toString().padStart(2, '0')}`;
+                .toString()
+                .padStart(2, '0')}-${dia.getDate().toString().padStart(2, '0')}`;
               const citasDia = citasPorFecha[fechaStr] || [];
               const esMesActual = dia.getMonth() === currentMonth.getMonth();
-
+  
               return (
-                <div key={index} className={`dia-calendario ${!esMesActual ? 'dia-inactivo' : ''}`}>
-                <div className="dia-numero">{dia.getDate()}</div>
-                <div className="citas-del-dia">
-                  {citasDia.map(cita => (
-                    <div key={cita._id} className="cita-calendario">
-                      <div className="cita-hora-grupo">
-                        <span className="cita-hora">{cita.hora}</span>
-                        <div className="grupo-info">
-                          {cita.tipo === 'grupo' ? (
-                            <>
-                              <img 
-                                src={cita.grupo?.imagen || '/img/grupos/grupo-a.png'} 
-                                alt={cita.grupo?.nombre} 
-                                className="icono-grupo-calendario" 
-                              />
-                              <span className="nombre-grupo">{cita.grupo?.nombre}</span>
-                            </>
-                          ) : (
-                            <span className="nombre-grupo">{cita.servicio?.nombre}</span>
-                          )}
+                <div
+                  key={index}
+                  className={`dia-calendario ${
+                    !esMesActual ? 'dia-inactivo' : ''
+                  }`}
+                >
+                  <div className="dia-numero">{dia.getDate()}</div>
+                  <div className="citas-del-dia">
+                    {citasDia.map((cita) => (
+                      <div
+                        key={cita._id}
+                        className="cita-calendario"
+                        onClick={() => abrirModal(cita)}
+                        style={{ cursor: 'pointer' }}
+                      >
+                        <div className="cita-hora-grupo">
+                          <span className="cita-hora">{cita.hora}</span>
+                          <div className="grupo-info">
+                            {cita.tipo === 'grupo' ? (
+                              <>
+                                <img
+                                  src={
+                                    cita.grupo?.imagen ||
+                                    '/img/grupos/grupo-a.png'
+                                  }
+                                  alt={cita.grupo?.nombre}
+                                  className="icono-grupo-calendario"
+                                />
+                                <span className="nombre-grupo">
+                                  {cita.grupo?.nombre}
+                                </span>
+                              </>
+                            ) : (
+                              <span className="nombre-grupo">
+                                {cita.servicio?.nombre}
+                              </span>
+                            )}
+                          </div>
                         </div>
-
-                      </div>
-                      
-                      <div className="cita-info">
-                        <span className="cita-paciente">{cita.paciente.nombre}</span>
-                        
-                        <div className="cita-detalle">
-                          <div className={`estado-container ${cita.estado}`}>
-                            <span className="estado-icono"></span>
-                            <span className="estado-texto">
-                              {cita.estado === 'pendiente' && 'PEND'}
-                              {cita.estado === 'finalizada' && 'FIN'}
-                              {cita.estado === 'cancelada' && 'CANC'}
+  
+                        <div className="cita-info">
+                          
+  
+                          <div className="cita-detalle">
+                            <div className={`estado-container ${cita.estado}`}>
+                              <span className="estado-icono"></span>
+                              <span className="estado-texto">
+                                {cita.estado === 'pendiente' && 'PEND'}
+                                {cita.estado === 'finalizada' && 'FIN'}
+                                {cita.estado === 'cancelada' && 'CANC'}
+                              </span>
+                            </div>
+                            <span className="cita-terapeuta">
+                              {cita.terapeuta}
                             </span>
                           </div>
-                          <span className="cita-terapeuta">{cita.terapeuta}</span>
                         </div>
                       </div>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
                 </div>
-              </div>
               );
             })}
           </div>
         </div>
       )}
+  
+      {/* 🔽 MODAL emergente al hacer clic en cita */}
+      {modalVisible && citaSeleccionada && (
+        <div className="modal-overlay">
+          <div className="modal-content">
+            <h3>Detalles de la Cita</h3>
+            <p>
+              <strong>Fecha:</strong> {citaSeleccionada.fecha}
+            </p>
+            <p>
+              <strong>Hora:</strong> {citaSeleccionada.hora}
+            </p>
+            <p>
+              <strong>Paciente:</strong> {citaSeleccionada.paciente.nombre}
+            </p>
+            <p>
+              <strong>Terapeuta:</strong> {citaSeleccionada.terapeuta}
+            </p>
+            <p>
+              <strong>Tipo:</strong>{' '}
+              {citaSeleccionada.tipo === 'grupo'
+                ? citaSeleccionada.grupo?.nombre
+                : citaSeleccionada.servicio?.nombre}
+            </p>
+  
+            <div className="modal-botones">
+              <button onClick={confirmarCita}>Confirmar</button>
+              <button onClick={reagendarCita}>Reagendar</button>
+              <button onClick={cancelarCita} style={{ backgroundColor: '#fa5252', color: 'white' }}>
+                Cancelar
+              </button>
+              <button onClick={cerrarModal}>Cerrar</button>
+            </div>
+
+          </div>
+        </div>
+      )}
     </div>
   );
+  
 };
 
 export default MisCitas;
