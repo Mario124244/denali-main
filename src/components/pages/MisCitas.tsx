@@ -82,18 +82,26 @@ const MisCitas: React.FC = () => {
   const cancelarCita = async () => {
     if (!citaSeleccionada) return;
   
-    await fetch(`${process.env.REACT_APP_API_URL}/citas/${citaSeleccionada._id}/estado`, {
-      method: 'PATCH',
+    const confirmar = window.confirm("¿Estás seguro de que deseas cancelar esta cita?");
+    if (!confirmar) return;
+  
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/citas/${citaSeleccionada._id}`, {
+      method: 'DELETE',
       headers: {
-        'Content-Type': 'application/json',
         Authorization: `Bearer ${localStorage.getItem('token')}`
-      },
-      body: JSON.stringify({ estado: 'cancelada' })
+      }
     });
   
-    cerrarModal();
-    window.location.reload();
+    if (response.ok) {
+      alert("✅ Cita cancelada correctamente");
+      cerrarModal();
+      window.location.reload();
+    } else {
+      const error = await response.json();
+      alert("❌ Error al cancelar la cita: " + error.mensaje);
+    }
   };
+  
   
   const reagendarCita = async () => {
     if (!citaSeleccionada) return;
@@ -286,8 +294,9 @@ const MisCitas: React.FC = () => {
               <button onClick={confirmarCita}>Confirmar</button>
               <button onClick={reagendarCita}>Reagendar</button>
               <button onClick={cancelarCita} style={{ backgroundColor: '#fa5252', color: 'white' }}>
-                Cancelar
-              </button>
+                  Cancelar
+                </button>
+
               <button onClick={cerrarModal}>Cerrar</button>
             </div>
 

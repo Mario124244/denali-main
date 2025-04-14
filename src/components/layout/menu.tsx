@@ -45,7 +45,7 @@ const Navbar = () => {
         <li><Link to="/informacion">Información</Link></li>
         <li><Link to="/contact">Contacto</Link></li>
         <li><Link to="/about">Paquetes</Link></li>
-        <li><Link to="#">Redes</Link></li>
+        <li><Link to="/redes">Redes</Link></li>
 
         {!isAuthenticated && (
           <>

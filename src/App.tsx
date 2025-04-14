@@ -11,6 +11,7 @@ import RegistroUsuario from './components/pages/RegistroUsuario';
 import LoginUsuario from './components/pages/LoginUsuario';
 import { AuthProvider } from './context/AuthContext'; // ✅
 import MisCitas from './components/pages/MisCitas';
+import ContactSection from './components/pages/redes';
 
 const App: React.FC = () => {
   return (
@@ -28,6 +29,7 @@ const App: React.FC = () => {
             <Route path="/registro" element={<RegistroUsuario />} />
             <Route path="/login" element={<LoginUsuario />} />
             <Route path="/mis-citas" element={<MisCitas />} />
+            <Route path="/redes" element={<ContactSection />} />
           </Routes>
         </div>
       </Router>
