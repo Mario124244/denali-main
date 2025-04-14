@@ -171,17 +171,48 @@ const reagendarCita = async (req, res) => {
     const { id } = req.params;
     const { fecha, hora } = req.body;
 
-    const cita = await Cita.findByIdAndUpdate(id, { fecha, hora }, { new: true });
-
-    if (!cita) {
-      return res.status(404).json({ mensaje: 'Cita no encontrada' });
+    // 🔍 Buscar la cita actual
+    const citaActual = await Cita.findById(id);
+    if (!citaActual) {
+      return res.status(404).json({ mensaje: 'Cita original no encontrada' });
     }
+
+    // ⚠️ Verificar si ya existe otra cita ocupando la misma hora
+    let conflicto;
+
+    if (citaActual.tipo === 'grupo') {
+      // Validación para citas de grupo
+      conflicto = await Cita.findOne({
+        fecha,
+        hora,
+        tipo: 'grupo',
+        'grupo.nombre': citaActual.grupo.nombre,
+        _id: { $ne: id } // excluir la propia cita
+      });
+    } else if (citaActual.tipo === 'servicio') {
+      // Validación para citas de servicio
+      conflicto = await Cita.findOne({
+        fecha,
+        hora,
+        tipo: 'servicio',
+        terapeuta: citaActual.terapeuta,
+        _id: { $ne: id }
+      });
+    }
+
+    if (conflicto) {
+      return res.status(400).json({ mensaje: 'Ya existe una cita en ese horario para ese grupo o terapeuta' });
+    }
+
+    // ✅ Actualizar si no hay conflicto
+    const cita = await Cita.findByIdAndUpdate(id, { fecha, hora }, { new: true });
 
     res.status(200).json(cita);
   } catch (error) {
     res.status(500).json({ mensaje: 'Error al reagendar cita', error });
   }
 };
+
 
 
 
