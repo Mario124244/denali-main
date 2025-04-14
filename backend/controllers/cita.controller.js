@@ -213,6 +213,21 @@ const reagendarCita = async (req, res) => {
   }
 };
 
+const eliminarCita = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const cita = await Cita.findByIdAndDelete(id);
+
+    if (!cita) {
+      return res.status(404).json({ mensaje: 'Cita no encontrada' });
+    }
+
+    res.status(200).json({ mensaje: 'Cita eliminada correctamente' });
+  } catch (error) {
+    res.status(500).json({ mensaje: 'Error al eliminar cita', error });
+  }
+};
+
 
 
 
@@ -223,5 +238,6 @@ module.exports = {
   obtenerCitasPorServicioYFecha,
   obtenerCitasPorFecha,
   actualizarEstadoCita,
-  reagendarCita
+  reagendarCita,
+  eliminarCita
 };
