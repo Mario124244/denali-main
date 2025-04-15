@@ -20,19 +20,21 @@ exports.loginUsuario = async (req, res) => {
     }
 
     const token = jwt.sign(
-      { id: usuario._id },
+      { id: usuario._id, rol: usuario.rol }, // 👈 agrega el rol
       process.env.JWT_SECRET,
       { expiresIn: "1d" }
     );
-
+    
     res.json({
       usuario: {
         id: usuario._id,
         nombre: usuario.nombre,
-        correo: usuario.correo
+        correo: usuario.correo,
+        rol: usuario.rol // 👈 importante
       },
       token
     });
+    
 
   } catch (error) {
     console.error("Error en login:", error);

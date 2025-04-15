@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const verificarToken = require('../middlewares/auth.middleware');
+const esAdmin = require('./middlewares/admin.middleware');
 const { 
   crearCita, 
   obtenerCitas, 
@@ -12,6 +13,7 @@ const {
   reagendarCita,
   eliminarCita
 } = require('../controllers/cita.controller');
+
 
 // Crear una cita (requiere token)
 router.post('/citas', verificarToken, crearCita);
@@ -24,6 +26,10 @@ router.get('/citas/grupo', obtenerCitasPorGrupoYFecha);
 
 // ✅ Obtener citas por servicio y fecha (para citas tipo servicio)
 router.get('/citas/servicio', obtenerCitasPorServicioYFecha);
+router.get('/admin/citas', verificarToken, esAdmin, async (req, res) => {
+  const citas = await Cita.find().populate('usuario', 'nombre correo');
+  res.json(citas);
+});
 
 // Obtener TODAS las citas de una fecha (sin importar grupo o servicio)
 router.get('/citas/fecha', obtenerCitasPorFecha);

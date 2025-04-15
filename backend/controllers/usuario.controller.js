@@ -12,13 +12,18 @@ const registrarUsuario = async (req, res) => {
     const nuevoUsuario = new Usuario({ nombre, correo, password: hashedPassword });
     const guardado = await nuevoUsuario.save();
 
-    const token = jwt.sign({ id: guardado._id }, process.env.JWT_SECRET, { expiresIn: '4h' });
-
+    const token = jwt.sign(
+      { id: guardado._id, rol: guardado.rol }, // 👈 agrega el rol
+      process.env.JWT_SECRET,
+      { expiresIn: '4h' }
+    );
+    
     res.status(201).json({
       mensaje: '✅ Usuario registrado con éxito',
       token,
-      usuario: { nombre: guardado.nombre, correo: guardado.correo }
+      usuario: { nombre: guardado.nombre, correo: guardado.correo, rol: guardado.rol } // 👈 también aquí
     });
+    
   } catch (error) {
     res.status(500).json({ mensaje: '❌ Error al registrar usuario', error: error.message });
   }
