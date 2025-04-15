@@ -4,6 +4,8 @@ const router = express.Router();
 const verificarToken = require('../middlewares/auth.middleware');
 // ✅ correcto (sube un nivel al usar "../")
 const esAdmin = require('../middlewares/admin.middlewares');
+const Cita = require('../models/cita.model'); // 👈 AGREGA ESTO
+
 
 const { 
   crearCita, 
