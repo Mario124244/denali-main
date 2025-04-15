@@ -238,9 +238,11 @@ const obtenerCitasAdmin = async (req, res) => {
 
     res.status(200).json(citas);
   } catch (error) {
+    console.error("Error real en /admin/citas:", error); // 👈 AGREGA ESTO
     res.status(500).json({ mensaje: 'Error al obtener citas (admin)', error });
   }
 };
+
 
 
 
