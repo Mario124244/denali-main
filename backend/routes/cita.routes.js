@@ -11,6 +11,7 @@ const {
   obtenerCitasPorGrupoYFecha,
   obtenerCitasPorServicioYFecha, // ✅ nueva
   obtenerCitasPorFecha,
+  obtenerCitasAdmin,
   actualizarEstadoCita,
   reagendarCita,
   eliminarCita
@@ -33,6 +34,7 @@ router.get('/admin/citas', verificarToken, esAdmin, async (req, res) => {
   res.json(citas);
 });
 
+router.get('/admin/citas', verificarToken, esAdmin, obtenerCitasAdmin);
 // Obtener TODAS las citas de una fecha (sin importar grupo o servicio)
 router.get('/citas/fecha', obtenerCitasPorFecha);
 router.patch('/citas/:id/estado', verificarToken, actualizarEstadoCita);

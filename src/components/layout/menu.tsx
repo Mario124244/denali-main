@@ -53,31 +53,41 @@ const Navbar = () => {
           </>
         )}
 
-        {isAuthenticated && (
-          <>
-            <li><Link to="/mis-citas">Mis Citas</Link></li>
-            <li className="submenu-container">
-  <button 
-    className="btn-appointment btn-cita" 
-    onClick={() => setShowAgendarOpciones(prev => !prev)}
-  >
-    Agendar Cita
-  </button>
-  {showAgendarOpciones && (
-    <ul className="submenu">
-      <li><Link to="/agendar-grupo">Agendar Grupo</Link></li>
-      <li><Link to="/agendar-servicio">Agendar Servicio</Link></li>
-    </ul>
-  )}
-</li>
+            {isAuthenticated && (
+              <>
+                <li><Link to="/mis-citas">Mis Citas</Link></li>
 
-            <li>
-              <button className="btn-appointment2" onClick={handleLogout}>
-                Cerrar sesión
-              </button>
-            </li>
-          </>
-        )}
+                <li className="submenu-container">
+                  <button 
+                    className="btn-appointment btn-cita" 
+                    onClick={() => setShowAgendarOpciones(prev => !prev)}
+                  >
+                    Agendar Cita
+                  </button>
+                  {showAgendarOpciones && (
+                    <ul className="submenu">
+                      <li><Link to="/agendar-grupo">Agendar Grupo</Link></li>
+                      <li><Link to="/agendar-servicio">Agendar Servicio</Link></li>
+                    </ul>
+                  )}
+                </li>
+
+                {/* 👇 Enlace visible solo para admins */}
+                {usuario?.rol === 'admin' && (
+                  <li>
+                    <Link to="/admin/citas" className="admin-link">
+                      Administrar Citas
+                    </Link>
+                  </li>
+                )}
+
+                <li>
+                  <button className="btn-appointment2" onClick={handleLogout}>
+                    Cerrar sesión
+                  </button>
+                </li>
+              </>
+            )}
       </ul>
     </nav>
   );

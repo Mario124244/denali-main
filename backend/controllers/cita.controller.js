@@ -228,11 +228,26 @@ const eliminarCita = async (req, res) => {
   }
 };
 
+// ✅ Obtener TODAS las citas (admin)
+const obtenerCitasAdmin = async (req, res) => {
+  try {
+    const citas = await Cita.find()
+      .populate('paciente', 'nombre correo')
+      .populate('usuario', 'nombre correo')
+      .select('fecha hora terapeuta estado paciente usuario tipo');
+
+    res.status(200).json(citas);
+  } catch (error) {
+    res.status(500).json({ mensaje: 'Error al obtener citas (admin)', error });
+  }
+};
+
 
 
 
 module.exports = {
   crearCita,
+  obtenerCitasAdmin,
   obtenerCitas,
   obtenerCitasPorGrupoYFecha,
   obtenerCitasPorServicioYFecha,
