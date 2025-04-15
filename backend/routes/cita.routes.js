@@ -32,9 +32,12 @@ router.get('/citas/grupo', obtenerCitasPorGrupoYFecha);
 // ✅ Obtener citas por servicio y fecha (para citas tipo servicio)
 router.get('/citas/servicio', obtenerCitasPorServicioYFecha);
 router.get('/admin/citas', verificarToken, esAdmin, async (req, res) => {
-  const citas = await Cita.find().populate('usuario', 'nombre correo');
+  const citas = await Cita.find()
+    .populate('usuario', 'nombre correo')
+    .populate('paciente', 'nombre correo');
   res.json(citas);
 });
+
 
 router.delete('/citas/:id', verificarToken, esAdmin, eliminarCita);
 router.patch('/citas/:id/reagendar', verificarToken, esAdmin, reagendarCita);
