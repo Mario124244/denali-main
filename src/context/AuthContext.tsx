@@ -4,7 +4,9 @@ interface Usuario {
   id: string;
   nombre: string;
   correo: string;
+  rol: 'admin' | 'usuario'; // ✅ Agrega esto
 }
+
 
 interface AuthContextType {
   usuario: Usuario | null;

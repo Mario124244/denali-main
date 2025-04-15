@@ -43,9 +43,8 @@ const Navbar = () => {
       <ul className={`nav-links ${menuOpen ? "active" : ""}`}>
         <li><Link to="/inicio">Inicio</Link></li>
         <li><Link to="/informacion">Información</Link></li>
-        <li><Link to="/contact">Contacto</Link></li>
         <li><Link to="/about">Paquetes</Link></li>
-        <li><Link to="/redes">Redes</Link></li>
+        <li><Link to="/redes">Contactanos</Link></li>
 
         {!isAuthenticated && (
           <>

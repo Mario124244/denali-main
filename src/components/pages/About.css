@@ -165,6 +165,76 @@ body.about-body {
   transform: scale(1.03);
 }
 
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.modal-contenido {
+  background-color: #ffffff;
+  padding: 2rem;
+  border-radius: 15px;
+  width: 90%;
+  max-width: 500px;
+  position: relative;
+  font-family: 'Filson', sans-serif;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.modal-contenido h2 {
+  margin-top: 1rem;
+  font-size: 1.8rem;
+  color: #333;
+}
+
+.modal-contenido ul {
+  padding-left: 1rem;
+  list-style: disc;
+  color: #444;
+  margin-top: 0.5rem;
+}
+
+.modal-contenido li {
+  margin-bottom: 0.4rem;
+}
+
+.modal-img {
+  display: block;
+  width: 100px;
+  margin: 0 auto;
+}
+
+.cerrar-modal {
+  position: absolute;
+  top: 0.8rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: #888;
+  cursor: pointer;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 /* MEDIA QUERIES RESPONSIVE */
 
 @media (max-width: 1024px) {

@@ -1,7 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import './About.css';
 
 const About: React.FC = () => {
+  const [tarjetaSeleccionada, setTarjetaSeleccionada] = useState<number | null>(null);
+
   useEffect(() => {
     document.body.classList.add('about-body');
     return () => {
@@ -10,24 +12,37 @@ const About: React.FC = () => {
   }, []);
 
   const tarjetas = [
-    { img: `${process.env.PUBLIC_URL}/img/Baby 1.png`, titulo: 'Paquete 1', descripcion: 'Descripción de la terapia A.' },
-    { img: `${process.env.PUBLIC_URL}/img/Bichito.png`, titulo: 'Paquete 2', descripcion: 'Descripción de la terapia B.' },
-    { img: `${process.env.PUBLIC_URL}/img/Triqui.png`, titulo: 'Paquete 3', descripcion: 'Descripción de la terapia C.' },
-    { img: `${process.env.PUBLIC_URL}/img/Woolis.png`, titulo: 'Paquete 4', descripcion: 'Descripción de la terapia D.' },
-    { img: `${process.env.PUBLIC_URL}/img/Kantis.png`, titulo: 'Paquete 5', descripcion: 'Descripción de la terapia E.' },
-    { img: `${process.env.PUBLIC_URL}/img/Rompecabeza.png`, titulo: 'Paquete 6', descripcion: 'Descripción de la terapia F.' },
-    { img: `${process.env.PUBLIC_URL}/img/Triqui-Closed.png`, titulo: 'Paquete 7', descripcion: 'Descripción de la terapia G.' },
-    { img: `${process.env.PUBLIC_URL}/img/Kantis-closed.png`, titulo: 'Paquete 8', descripcion: 'Descripción de la terapia H.' },
-    { img: `${process.env.PUBLIC_URL}/img/Bichito-closed.png`, titulo: 'Paquete 9', descripcion: 'Descripción de la terapia I.' },
+    {
+      img: `${process.env.PUBLIC_URL}/img/Baby 1.png`,
+      titulo: 'Paquete 1',
+      descripcion: 'Descripción de la terapia A.',
+      servicios: ['Terapia 1', 'Terapia 2', 'Evaluación inicial']
+    },
+    {
+      img: `${process.env.PUBLIC_URL}/img/Bichito.png`,
+      titulo: 'Paquete 2',
+      descripcion: 'Descripción de la terapia B.',
+      servicios: ['Terapia cognitiva', 'Terapia física']
+    },
+    {
+      img: `${process.env.PUBLIC_URL}/img/Triqui.png`,
+      titulo: 'Paquete 2',
+      descripcion: 'Descripción de la terapia B.',
+      servicios: ['Terapia cognitiva', 'Terapia física']
+    },
+    // Agrega más paquetes si quieres
   ];
-  
+
+  const cerrarModal = () => {
+    setTarjetaSeleccionada(null);
+  };
 
   return (
     <div className="container">
       <div className="uno">
         <div className="titulo1">
           <h1>Nombre Terapeuta</h1>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita sed enim nihil magni, omnis reprehenderit! Neque cum sint explicabo modi atque, vero velit repellendus ab quae laborum. Voluptatum, eaque consectetur?</p>
+          <p>Lorem ipsum dolor sit amet...</p>
         </div>
         <div className="imagen">
           <img src={`${process.env.PUBLIC_URL}/img/Rompecabeza2.png`} alt="Descripción de la imagen" />
@@ -36,13 +51,17 @@ const About: React.FC = () => {
 
       <div className="dos">
         <div className="sub1">
-          <h2 className="subtitulo">Informacion sobre Paquetes</h2>
+          <h2 className="subtitulo">Información sobre Paquetes</h2>
         </div>
 
         <div className="sub2">
           <div className="tarjetas-grid">
             {tarjetas.map((tarjeta, index) => (
-              <div key={index} className="tarjeta">
+              <div
+                key={index}
+                className="tarjeta"
+                onClick={() => setTarjetaSeleccionada(index)}
+              >
                 <img src={tarjeta.img} alt={tarjeta.titulo} />
                 <h3>{tarjeta.titulo}</h3>
                 <p>{tarjeta.descripcion}</p>
@@ -51,6 +70,24 @@ const About: React.FC = () => {
           </div>
         </div>
       </div>
+
+      {/* ✅ MODAL flotante */}
+      {tarjetaSeleccionada !== null && (
+        <div className="modal-overlay" onClick={cerrarModal}>
+          <div className="modal-contenido" onClick={(e) => e.stopPropagation()}>
+            <button className="cerrar-modal" onClick={cerrarModal}>×</button>
+            <img src={tarjetas[tarjetaSeleccionada].img} alt="" className="modal-img" />
+            <h2>{tarjetas[tarjetaSeleccionada].titulo}</h2>
+            <p>{tarjetas[tarjetaSeleccionada].descripcion}</p>
+            <h4>Servicios incluidos:</h4>
+            <ul>
+              {tarjetas[tarjetaSeleccionada].servicios.map((servicio, i) => (
+                <li key={i}>{servicio}</li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

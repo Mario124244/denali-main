@@ -9,9 +9,11 @@ interface LoginResponse {
     id: string;
     nombre: string;
     correo: string;
+    rol: 'admin' | 'usuario'; // ✅ Incluye el rol
   };
   token: string;
 }
+
 
 
 const LoginUsuario: React.FC = () => {
