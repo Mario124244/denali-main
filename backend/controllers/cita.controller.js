@@ -235,7 +235,7 @@ const obtenerCitasAdmin = async (req, res) => {
       .populate('paciente', 'nombre correo')
       .populate('usuario', 'nombre correo')
       .select('fecha hora terapeuta estado paciente usuario tipo');
-
+      console.log("Citas con paciente poblado:", citas[0]?.paciente); // 👈
     res.status(200).json(citas);
   } catch (error) {
     console.error("Error real en /admin/citas:", error); // 👈 AGREGA ESTO
