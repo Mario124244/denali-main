@@ -247,6 +247,7 @@ const obtenerCitasAdmin = async (req, res) => {
 
 
 
+
 module.exports = {
   crearCita,
   obtenerCitasAdmin,

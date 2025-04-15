@@ -36,6 +36,10 @@ router.get('/admin/citas', verificarToken, esAdmin, async (req, res) => {
   res.json(citas);
 });
 
+router.delete('/citas/:id', verificarToken, esAdmin, eliminarCita);
+router.patch('/citas/:id/reagendar', verificarToken, esAdmin, reagendarCita);
+
+
 router.get('/admin/citas', verificarToken, esAdmin, obtenerCitasAdmin);
 // Obtener TODAS las citas de una fecha (sin importar grupo o servicio)
 router.get('/citas/fecha', obtenerCitasPorFecha);

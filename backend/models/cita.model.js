@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const citaSchema = new mongoose.Schema({
   paciente: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Paciente',
+    ref: 'Usuario',
     required: true
   },
   fecha: {
