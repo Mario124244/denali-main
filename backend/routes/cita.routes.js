@@ -2,7 +2,9 @@ const express = require('express');
 const router = express.Router();
 
 const verificarToken = require('../middlewares/auth.middleware');
-const esAdmin = require('./middlewares/admin.middleware');
+// ✅ correcto (sube un nivel al usar "../")
+const esAdmin = require('../middlewares/admin.middlewares');
+
 const { 
   crearCita, 
   obtenerCitas, 
