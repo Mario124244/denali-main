@@ -20,6 +20,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api', pacienteRoutes);
 app.use('/api', citaRoutes); // 👈 AÑADIDO
 app.use(express.static(path.join(__dirname, '../public')));
+require('./emailBot'); // ⬅️ agrega esta línea para iniciar el bot automático
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
   console.log(`🚀 Servidor escuchando en http://localhost:${PORT}`);
