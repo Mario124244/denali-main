@@ -17,7 +17,7 @@ const transporter = nodemailer.createTransport({
 });
 
 // Ejecuta cada hora
-cron.schedule('* * * * *', async () => {
+cron.schedule('0 * * * *', async () => {
   const ahora = new Date(); // ✅ primero defines esto
   const unaHoraDespues = new Date(ahora.getTime() + 60 * 60 * 1000);
 
