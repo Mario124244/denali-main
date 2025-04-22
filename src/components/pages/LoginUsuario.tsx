@@ -101,7 +101,7 @@ const LoginUsuario: React.FC = () => {
         <div style={styles.footer}>
           <a href="#recuperar" style={styles.link}>¿Olvidaste tu contraseña?</a>
           <p style={styles.signupText}>
-            ¿No tienes cuenta? <a href="#registro" style={styles.link}>Regístrate</a>
+            ¿No tienes cuenta? <a href="/registro" style={styles.link}>Regístrate</a>
           </p>
         </div>
       </div>

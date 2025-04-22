@@ -4,6 +4,13 @@
   width: 100%;
 }
 
+
+body.informacion-body {
+  background-color:rgb(37, 80, 167);
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 /* Estilo base para TODAS las áreas */
 .area1, .area2, .area3, .area4, .area5, .area6, .area7, .area8, .area9 {
   display: flex;
