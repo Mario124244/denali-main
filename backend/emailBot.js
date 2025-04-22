@@ -17,7 +17,7 @@ const transporter = nodemailer.createTransport({
 });
 
 // Ejecuta cada hora
-cron.schedule('0 * * * *', async () => {
+cron.schedule('* * * * *', async () => {
   console.log('🔎 Verificando citas que ocurren en la próxima hora...');
 
   const ahora = new Date();
@@ -30,6 +30,8 @@ cron.schedule('0 * * * *', async () => {
       $lte: unaHoraDespues.toTimeString().slice(0, 5)
     }
   }).populate('paciente');
+  console.log('🛠 Resultado crudo de las citas:', citas);
+
 
   // 👇 Aquí va tu verificación
   if (citas.length === 0) {
