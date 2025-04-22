@@ -49,7 +49,7 @@ cron.schedule('0 * * * *', async () => {
 
     try {
       await transporter.sendMail(mailOptions);
-      console.log(`📧 Correo enviado a ${paciente.correo}`);
+      console.log(`📧 Correo enviado al buenisimo a ${paciente.correo}`);
     } catch (error) {
       console.error('❌ Error al enviar correo:', error);
     }
