@@ -5,19 +5,18 @@ const Paciente = require('./models/paciente.model');
 require('dotenv').config();
 require('./config/db'); // conecta a MongoDB
 
-// 🟢 Log inicial
 console.log('📅 Bot de recordatorios activado ✅');
 
-// Configura el transporte de nodemailer (Gmail en este caso)
+// Configura el transporte
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
-    user: process.env.CORREO_REMITENTE,     // Tu correo
-    pass: process.env.PASSWORD_REMITENTE    // Tu contraseña o app password
+    user: process.env.CORREO_REMITENTE,
+    pass: process.env.PASSWORD_REMITENTE
   }
 });
 
-// Programa una tarea para que se ejecute cada hora
+// Ejecuta cada hora
 cron.schedule('0 * * * *', async () => {
   console.log('🔎 Verificando citas que ocurren en la próxima hora...');
 
@@ -32,9 +31,12 @@ cron.schedule('0 * * * *', async () => {
     }
   }).populate('paciente');
 
+  // 👇 Aquí va tu verificación
   if (citas.length === 0) {
     console.log('📭 No se encontraron citas próximas.');
     return;
+  } else {
+    console.log(`📋 Se encontraron ${citas.length} cita(s) para enviar recordatorio`);
   }
 
   for (const cita of citas) {
@@ -49,7 +51,7 @@ cron.schedule('0 * * * *', async () => {
 
     try {
       await transporter.sendMail(mailOptions);
-      console.log(`📧 Correo enviado al buenisimo a ${paciente.correo}`);
+      console.log(`📧 Correo enviado a ${paciente.correo}`);
     } catch (error) {
       console.error('❌ Error al enviar correo:', error);
     }
