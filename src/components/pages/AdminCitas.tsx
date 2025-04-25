@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-
+import './AdminCitas.css'
 interface Cita {
   _id: string;
   paciente: {
@@ -15,6 +15,13 @@ interface Cita {
 }
 
 const AdminCitas: React.FC = () => {
+
+  useEffect(() => {
+      document.body.classList.add('adminCitas-body');
+      return () => {
+        document.body.classList.remove('adminCitas-body');
+      };
+    }, []);
   const [citas, setCitas] = useState<Cita[]>([]);
   const [citaEditando, setCitaEditando] = useState<Cita | null>(null);
   const [form, setForm] = useState({ fecha: '', hora: '', estado: 'pendiente' });
@@ -27,6 +34,7 @@ const AdminCitas: React.FC = () => {
       minHeight: '100vh',
       fontFamily: 'Segoe UI, sans-serif',
     },
+    
     header: {
       display: 'flex',
       justifyContent: 'space-between',

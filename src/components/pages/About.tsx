@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import './About.css';
-
+import CardModal from '../cards/card';
 const About: React.FC = () => {
   const [tarjetaSeleccionada, setTarjetaSeleccionada] = useState<number | null>(null);
 
-  useEffect(() => {
-    document.body.classList.add('about-body');
-    return () => {
-      document.body.classList.remove('about-body');
-    };
-  }, []);
-
+    // About.tsx
+    useEffect(() => {
+      document.body.classList.add('about-body');
+      return () => {
+        document.body.classList.remove('about-body'); // ✅ Limpia al desmontar
+      };
+    }, []);
   const tarjetas = [
     {
       img: `${process.env.PUBLIC_URL}/img/Baby 1.png`,
@@ -53,20 +53,95 @@ const About: React.FC = () => {
         <div className="sub1">
           <h2 className="subtitulo">Información sobre Paquetes</h2>
         </div>
-
+          
         <div className="sub2">
+        
           <div className="tarjetas-grid">
-            {tarjetas.map((tarjeta, index) => (
-              <div
-                key={index}
-                className="tarjeta"
-                onClick={() => setTarjetaSeleccionada(index)}
-              >
-                <img src={tarjeta.img} alt={tarjeta.titulo} />
-                <h3>{tarjeta.titulo}</h3>
-                <p>{tarjeta.descripcion}</p>
-              </div>
-            ))}
+        
+          <CardModal
+            imgCard={`${process.env.PUBLIC_URL}/img/IMG_3393.jpg`}
+            imgModal={`${process.env.PUBLIC_URL}/img/IMG_3393.jpg`}
+            title="Terapia Infantil"
+            description="Descripción personalizada para terapia infantil"
+            tags={['Desarrollo', 'Motricidad', 'Aprendizaje']}
+            modalContent={[
+              'Contenido detallado sobre terapia infantil...',
+              'Beneficios y metodologías aplicadas...',
+              'Nuestro enfoque personalizado...'
+            ]}
+            buttonText="Agendar Terapia"
+          />
+
+          <CardModal
+            imgCard={`${process.env.PUBLIC_URL}/img/IMG_3182.jpg`}
+            imgModal={`${process.env.PUBLIC_URL}/img/IMG_3182.jpg`}
+            title="Terapia Infantil"
+            description="Descripción personalizada para terapia infantil"
+            tags={['Desarrollo', 'Motricidad', 'Aprendizaje']}
+            modalContent={[
+              'Contenido detallado sobre terapia infantil...',
+              'Beneficios y metodologías aplicadas...',
+              'Nuestro enfoque personalizado...'
+            ]}
+            buttonText="Agendar Terapia"
+          />
+
+          <CardModal
+            imgCard={`${process.env.PUBLIC_URL}/img/IMG_3529.jpg`}
+            imgModal={`${process.env.PUBLIC_URL}/img/IMG_3529.jpg`}
+            title="Terapia Infantil"
+            description="Descripción personalizada para terapia infantil"
+            tags={['Desarrollo', 'Motricidad', 'Aprendizaje']}
+            modalContent={[
+              'Contenido detallado sobre terapia infantil...',
+              'Beneficios y metodologías aplicadas...',
+              'Nuestro enfoque personalizado...'
+            ]}
+            buttonText="Agendar Terapia"
+          />
+
+          <CardModal
+            imgCard={`${process.env.PUBLIC_URL}/img/IMG_3553.jpg`}
+            imgModal={`${process.env.PUBLIC_URL}/img/IMG_3553.jpg`}
+            title="Terapia Infantil"
+            description="Descripción personalizada para terapia infantil"
+            tags={['Desarrollo', 'Motricidad', 'Aprendizaje']}
+            modalContent={[
+              'Contenido detallado sobre terapia infantil...',
+              'Beneficios y metodologías aplicadas...',
+              'Nuestro enfoque personalizado...'
+            ]}
+            buttonText="Agendar Terapia"
+          />
+
+          <CardModal
+            imgCard={`${process.env.PUBLIC_URL}/img/IMG_4303.jpg`}
+            imgModal={`${process.env.PUBLIC_URL}/img/IMG_4303.jpg`}
+            title="Terapia Infantil"
+            description="Descripción personalizada para terapia infantil"
+            tags={['Desarrollo', 'Motricidad', 'Aprendizaje']}
+            modalContent={[
+              'Contenido detallado sobre terapia infantil...',
+              'Beneficios y metodologías aplicadas...',
+              'Nuestro enfoque personalizado...'
+            ]}
+            buttonText="Agendar Terapia"
+          />
+
+          <CardModal
+            imgCard={`${process.env.PUBLIC_URL}/img/IMG_4299.jpg`}
+            imgModal={`${process.env.PUBLIC_URL}/img/IMG_4299.jpg`}
+            title="Terapia Infantil"
+            description="Descripción personalizada para terapia infantil"
+            tags={['Desarrollo', 'Motricidad', 'Aprendizaje']}
+            modalContent={[
+              'Contenido detallado sobre terapia infantil...',
+              'Beneficios y metodologías aplicadas...',
+              'Nuestro enfoque personalizado...'
+            ]}
+            buttonText="Agendar Terapia"
+          />
+
           </div>
         </div>
       </div>

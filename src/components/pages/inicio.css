@@ -59,7 +59,7 @@ body.inicio-body {
   }
   .container2 {
     width: 50vw;                 /* Ocupa la mitad de la pantalla */
-    height: 100vh;               /* Alto completo de la pantalla */
+    height: 120vh;               /* Alto completo de la pantalla */
     display: flex;               /* Flexbox para centrar contenido */
     flex-direction: column;      /* Apila el contenido verticalmente */
     justify-content: center;     /* Centra verticalmente */

@@ -1,3 +1,7 @@
+/* index.css */
+html {
+  height: 100%; /* ✅ Añade esto */
+}
 
 body {
   margin: 0;
@@ -6,8 +10,16 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh; /* ✅ Ya está correcto */
+  width: 100%;
 }
-
+/* index.css */
+body.informacion-body {
+  background-color: #9CDACE;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;

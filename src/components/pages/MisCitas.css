@@ -23,6 +23,7 @@
   align-items: center;
   margin-bottom: 1.5rem;
   padding: 0 1rem;
+  
 }
 
 .navegacion-mes button {
@@ -33,6 +34,7 @@
   border-radius: 8px;
   cursor: pointer;
   transition: opacity 0.2s;
+  background-color: black;
 }
 
 .navegacion-mes button:hover {
@@ -240,5 +242,93 @@
 .cita-estado.pendiente { background: #f1c40f; }
 .cita-estado.finalizada { background: #2ecc71; }
 .cita-estado.cancelada { background: #e74c3c; }
+
+
+@media (max-width: 1024px) {
+  .contenedor-citas {
+    padding: 1rem;
+  }
+
+  .contenedor-calendario {
+    padding: 0.5rem;
+  }
+
+  .navegacion-mes h3 {
+    font-size: 1.2rem;
+  }
+
+  .calendario-header,
+  .calendario-grid {
+    grid-template-columns: repeat(7, 1fr);
+  }
+
+  .dia-calendario {
+    min-height: 100px;
+    padding: 0.3rem;
+  }
+
+  .cita-paciente {
+    max-width: 60%;
+  }
+}
+
+@media (max-width: 768px) {
+  .calendario-header,
+  .calendario-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .dia-header {
+    font-size: 0.75rem;
+  }
+
+  .dia-calendario {
+    min-height: 90px;
+    font-size: 0.75rem;
+  }
+
+  .cita-calendario {
+    font-size: 0.7rem;
+    padding: 0.4rem;
+  }
+
+  .cita-terapeuta {
+    max-width: 60px;
+  }
+
+  .nombre-grupo {
+    max-width: 50%;
+  }
+}
+
+@media (max-width: 480px) {
+  .calendario-header,
+  .calendario-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .navegacion-mes h3 {
+    font-size: 1rem;
+  }
+
+  .dia-calendario {
+    min-height: 80px;
+    padding: 0.25rem;
+  }
+
+  .cita-hora {
+    font-size: 0.75rem;
+  }
+
+  .cita-paciente,
+  .cita-terapeuta {
+    font-size: 0.7rem;
+  }
+
+  .grupo-info {
+    max-width: 100%;
+  }
+}
+
 
 /* Resto de estilos permanecen iguales */
