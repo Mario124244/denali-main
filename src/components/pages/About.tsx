@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './About.css';
 import CardModal from '../cards/card';
+
 const About: React.FC = () => {
   const [tarjetaSeleccionada, setTarjetaSeleccionada] = useState<number | null>(null);
 
@@ -69,7 +70,7 @@ const About: React.FC = () => {
               'Beneficios y metodologías aplicadas...',
               'Nuestro enfoque personalizado...'
             ]}
-            buttonText="Agendar Terapia"
+            buttonText="Agendar Grupo"
           />
 
           <CardModal
@@ -83,7 +84,7 @@ const About: React.FC = () => {
               'Beneficios y metodologías aplicadas...',
               'Nuestro enfoque personalizado...'
             ]}
-            buttonText="Agendar Terapia"
+            buttonText="Agendar Grupo"
           />
 
           <CardModal
@@ -97,7 +98,7 @@ const About: React.FC = () => {
               'Beneficios y metodologías aplicadas...',
               'Nuestro enfoque personalizado...'
             ]}
-            buttonText="Agendar Terapia"
+            buttonText="Agendar Grupo"
           />
 
           <CardModal
@@ -111,7 +112,7 @@ const About: React.FC = () => {
               'Beneficios y metodologías aplicadas...',
               'Nuestro enfoque personalizado...'
             ]}
-            buttonText="Agendar Terapia"
+            buttonText="Agendar Servicio"
           />
 
           <CardModal
@@ -125,7 +126,7 @@ const About: React.FC = () => {
               'Beneficios y metodologías aplicadas...',
               'Nuestro enfoque personalizado...'
             ]}
-            buttonText="Agendar Terapia"
+            buttonText="Agendar Servicio"
           />
 
           <CardModal
@@ -139,12 +140,15 @@ const About: React.FC = () => {
               'Beneficios y metodologías aplicadas...',
               'Nuestro enfoque personalizado...'
             ]}
-            buttonText="Agendar Terapia"
+            buttonText="Agendar Servicio"
           />
 
           </div>
         </div>
       </div>
+
+      
+      
 
       {/* ✅ MODAL flotante */}
       {tarjetaSeleccionada !== null && (
@@ -163,6 +167,8 @@ const About: React.FC = () => {
           </div>
         </div>
       )}
+
+    
     </div>
   );
 };

@@ -13,7 +13,7 @@ body.informacion-body{
 
 
 /* Estilo base para TODAS las áreas */
-.area1, .area2, .area3, .area4, .area5, .area6, .area7, .area8, .area9 {
+.area1, .area2, .area3 {
   display: flex;
   align-items: center;        /* Centra verticalmente */
   justify-content: center;    /* Centra horizontalmente */
@@ -26,12 +26,7 @@ body.informacion-body{
 /* Curva solo desde area2 en adelante */
 .area2,
 .area3,
-.area4,
-.area5,
-.area6,
-.area7,
-.area8,
-.area9 {
+{
   border-top-left-radius: 100% 80px;
   border-top-right-radius: 100% 80px;
   margin-top: -40px;
@@ -41,7 +36,7 @@ body.informacion-body{
 .area1 { background-color: #9CDACE; }
 .area2 { background-color: #F3A2B5; }
 .area3 { background-color: #FDE262; }
-.area4 { background-color:rgb(180, 102, 196); }
+.area4 { background-color:rgb(240, 240, 240); }
 .area5 { background-color: #7066C2; }
 .area6 { background-color: #B89ED8; }
 .area7 { background-color: #ADC7EF; }
@@ -77,12 +72,7 @@ body.informacion-body{
   .area1,
   .area2,
   .area3,
-  .area4,
-  .area5,
-  .area6,
-  .area7,
-  .area8,
-  .area9 {
+  {
     flex-direction: column;
     text-align: center;
   }

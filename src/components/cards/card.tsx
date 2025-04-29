@@ -9,9 +9,14 @@ interface CardModalProps {
     badgeText?: string;
     tags: string[];
     modalContent: string[];
-    buttonText: string;
+    buttonText: 'Agendar Servicio' | 'Agendar Grupo' | string;
+    customUrl?: string; // Opcional para sobreescribir URL
   }
-  
+const getButtonType = (text: string) => {
+    if(text === 'Agendar Servicio') return 'service';
+    if(text === 'Agendar Grupo') return 'group';
+    return 'service'; // Valor por defecto
+};
 const CardModal = ({
     imgCard,
     imgModal,
@@ -20,8 +25,17 @@ const CardModal = ({
     badgeText = 'FEATURED',
     tags,
     modalContent,
-    buttonText
+    buttonText,
+    customUrl
   }: CardModalProps) => {
+    const buttonType = getButtonType(buttonText);
+    
+    const getButtonUrl = () => {
+        if(customUrl) return customUrl;
+        return buttonType === 'service' 
+            ? '/agendar-servicio' 
+            : '/agendar-grupo';
+    };
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isCardVisible, setIsCardVisible] = useState(false);
 
@@ -74,7 +88,7 @@ const CardModal = ({
             onClick={openModal}
             onMouseEnter={(e) => e.currentTarget.style.transition = 'all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)'}
           >
-            Read More
+            Leer mas
           </a>
         </div>
       </div>
@@ -127,17 +141,17 @@ const CardModal = ({
 
           <div className="modal-footer">
             <a 
-              href="#" 
-              className="btn btn-primary"
-              style={{
-                transition: `all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.7s`,
-                opacity: isModalOpen ? 1 : 0,
-                transform: isModalOpen ? 'translateY(0)' : 'translateY(20px)'
-              }}
+                href={getButtonUrl()}
+                className={`btn ${buttonType === 'service' ? 'btn-primary' : 'btn-primary'}`}
+                style={{
+                    transition: `all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.7s`,
+                    opacity: isModalOpen ? 1 : 0,
+                    transform: isModalOpen ? 'translateY(0)' : 'translateY(20px)'
+                }}
             >
-              {buttonText}
+                {buttonText}
             </a>
-          </div>
+        </div>
         </div>
       </div>
     </div>

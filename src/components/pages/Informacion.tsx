@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import NomNomGallery from '../galeria2/galeria';
 import styles from './Informacion.module.css';
 
 const Informacion: React.FC = () => {
@@ -42,6 +43,11 @@ const Informacion: React.FC = () => {
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum quos quae maxime voluptas optio, expedita id quas consequatur corrupti earum nemo voluptatem sint dolor nihil dicta veritatis, distinctio sapiente omnis?</p>
             <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fugiat atque alias tenetur reiciendis nulla? Repellat, optio maxime! Odit soluta, autem mollitia eius quod doloribus. Vitae deleniti aliquam tempora consequatur voluptates.</p>
         </div>
+      </div>
+
+      <div className={styles.area4}>
+        <NomNomGallery />
+        
       </div>
       
     </div>
