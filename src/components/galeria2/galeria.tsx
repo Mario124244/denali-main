@@ -28,21 +28,21 @@ const NomNomGallery: React.FC = () => {
 
 
   const items: GridItem[] = [
-    { details: 'jelly-o brownie sweet' },
-    { details: 'Muffin jelly gingerbread', size: 'large' },
-    { details: 'sesame snaps chocolate', size: 'medium' },
-    { details: 'Oat cake', size: 'large' },
-    { details: 'jujubes cheesecake', size: 'full' },
-    { details: 'Dragée pudding brownie', size: 'medium' },
-    { details: 'Oat cake', size: 'large' },
-    { details: 'powder toffee' },
-    { details: 'pudding cheesecake', size: 'medium' },
-    { details: 'toffee bear claw', size: 'large' },
-    { details: 'cake cookie croissant' },
-    { details: 'liquorice sweet roll', size: 'medium' },
-    { details: 'chocolate marzipan', size: 'medium' },
-    { details: 'danish dessert lollipop', size: 'large' },
-    { details: 'sugar plum dragée' }
+    { details: 'Descripcion 1' },
+    { details: 'Descripcion 2', size: 'large' },
+    { details: 'descripcion 3', size: 'medium' },
+    { details: 'descripcion 5', size: 'large' },
+    { details: 'descripcion 6', size: 'full' },
+    { details: 'descripcion 7', size: 'medium' },
+    { details: 'descripcion 8', size: 'large' },
+    { details: 'descripcion 9' },
+    { details: 'descripcion 10', size: 'medium' },
+    { details: 'descripcion 11', size: 'large' },
+    { details: 'descripcion 12' },
+    { details: 'descripcion 13', size: 'medium' },
+    { details: 'descripcion 14', size: 'medium' },
+    { details: 'descripcion 15', size: 'large' },
+    { details: 'descripcion 16' }
   ];
 
   useEffect(() => {
@@ -52,14 +52,14 @@ const NomNomGallery: React.FC = () => {
   if (!gridSupported) {
     return (
       <div className={styles.message}>
-        Sorry, your browser does not support CSS Grid. 😅
+        tu navegador no soporta css grid
       </div>
     );
   }
 
   return (
     <section className={styles.section}>
-      <h1>Galeria DENALI</h1>
+      
       <div className={styles.grid}>
         {items.map((item, index) => {
           const backgroundImage = `url(${backgroundImages[index]})`;

@@ -1,0 +1,36 @@
+$cloudColor: #ffffff;
+
+#clouds path {
+  fill: $cloudColor !important;
+  stroke: $cloudColor !important;
+}
+.cloudSeparator svg {
+	display: block;
+	margin: 0;
+	padding: 0;
+	line-height: 0;
+  }
+  
+
+:global(#clouds) path {
+	fill: #ffffff !important;
+	stroke: #ffffff !important;
+  }
+  
+.clouds {
+  background: $cloudColor;
+  
+  p {
+    color: #e7e7e7;
+  }
+  
+  a {
+ 
+    color: darken($cloudColor, 10%); 
+    text-decoration: none;
+    
+    &:hover {
+      color: darken($cloudColor, 40%);
+    }
+  }
+}
