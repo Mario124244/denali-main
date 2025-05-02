@@ -32,6 +32,7 @@ const Informacion: React.FC = () => {
             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fugiat atque alias
             tenetur reiciendis nulla? Repellat, optio maxime! Odit soluta, autem mollitia
             eius quod doloribus. Vitae deleniti aliquam tempora consequatur voluptates.
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nisi ratione sed mollitia quisquam dicta provident voluptates quaerat! Ullam vero dolor porro fugiat! Harum atque sequi voluptatibus ipsa! Sequi, quasi autem?
           </p>
         </div>
       </div>
@@ -50,6 +51,7 @@ const Informacion: React.FC = () => {
             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fugiat atque alias
             tenetur reiciendis nulla? Repellat, optio maxime! Odit soluta, autem mollitia
             eius quod doloribus. Vitae deleniti aliquam tempora consequatur voluptates.
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. A ipsam, eaque saepe rem recusandae pariatur, magnam eius optio temporibus veniam assumenda autem eos animi nisi nihil repudiandae commodi eum laudantium?
           </p>
         </div>
         <div className={styles.imagen}>
@@ -67,10 +69,12 @@ const Informacion: React.FC = () => {
       <div className={styles.area3}>
         
         <div className={styles.imagen}>
+        <div className={styles.marcoDecorativo}>
           <img
-            src={`${process.env.PUBLIC_URL}/img/terapeuta3.png`}
+            src={`${process.env.PUBLIC_URL}/img/terapeuta3.jpg`}
             alt="Terpeuta3"
           />
+          </div>
         </div>
         <div className={styles.texto}>
           <h1>NOMBRE DE TERAPEUTA</h1>
@@ -78,6 +82,7 @@ const Informacion: React.FC = () => {
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum quos quae
             maxime voluptas optio, expedita id quas consequatur corrupti earum nemo
             voluptatem sint dolor nihil dicta veritatis, distinctio sapiente omnis?
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae ipsum perspiciatis soluta dolore, consequatur dicta ratione nobis porro commodi laboriosam debitis distinctio pariatur quam incidunt a, sint ab ducimus! Quos!
           </p>
           <p>
             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fugiat atque alias

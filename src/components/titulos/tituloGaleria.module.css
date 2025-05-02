@@ -16,7 +16,7 @@
 
 /* Aplica animación a elementos que tengan clases con "el" */
 .loading [class*="el"] {
-  animation: bouncing 3s ease;
+  animation: bouncing 5s ease;
 }
 
 
