@@ -1,11 +1,18 @@
 import React from 'react';
 import styles from '../separadores/separadorUno.module.css'; // Asegúrate de crear este archivo CSS o ajustar el nombre
+interface CloudSeparatorProps {
+  color?: string; // Prop opcional para el color
+}
 
-const CloudSeparator: React.FC = () => {
+const CloudSeparator: React.FC<CloudSeparatorProps> = ({ color = "#ffffff" }) => {
   return (
-    <div className={styles.cloudSeparator}>
+    <div 
+      className={styles.cloudSeparator}
+      style={{ "--cloud-color": color } as React.CSSProperties} // Inyecta el color
+    >
       <svg
-        id="clouds"
+        className={styles.clouds}
+        style={{ "--cloud-color": color } as React.CSSProperties}
         xmlns="http://www.w3.org/2000/svg"
         version="1.1"
         width="100%"

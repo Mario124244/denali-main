@@ -1,36 +1,17 @@
-$cloudColor: #ffffff;
-
-#clouds path {
-  fill: $cloudColor !important;
-  stroke: $cloudColor !important;
+.cloudSeparator {
+  /* Contenedor, estilos base */
 }
-.cloudSeparator svg {
-	display: block;
-	margin: 0;
-	padding: 0;
-	line-height: 0;
-  }
-  
 
-:global(#clouds) path {
-	fill: #ffffff !important;
-	stroke: #ffffff !important;
-  }
-  
-.clouds {
-  background: $cloudColor;
-  
-  p {
-    color: #e7e7e7;
-  }
-  
-  a {
- 
-    color: darken($cloudColor, 10%); 
-    text-decoration: none;
-    
-    &:hover {
-      color: darken($cloudColor, 40%);
-    }
-  }
+/* ⚠️ Usa Clases, NO IDs */
+.clouds path {
+  fill: var(--cloud-color) !important; 
+  stroke: var(--cloud-color) !important;
+  transition: fill 0.3s; /* Opcional para animación */
+}
+
+.cloudSeparator svg {
+  display: block;
+  margin: 0;
+  padding: 0;
+  line-height: 0;
 }

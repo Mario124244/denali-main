@@ -35,7 +35,9 @@ const Informacion: React.FC = () => {
           </p>
         </div>
       </div>
-
+      <div className={styles.area8}>
+        <CloudSeparator color='#F3A2B5'/>
+        </div>
       <div className={styles.area2}>
         <div className={styles.texto}>
           <h1>NOMBRE DE TERAPEUTA</h1>
@@ -56,9 +58,14 @@ const Informacion: React.FC = () => {
             alt="Terapeuta2"
           />
         </div>
+        
       </div>
-
+      <div className={styles.area7}>
+        <CloudSeparator color='#FDE262'/>
+        </div>
+      
       <div className={styles.area3}>
+        
         <div className={styles.imagen}>
           <img
             src={`${process.env.PUBLIC_URL}/img/terapeuta3.png`}

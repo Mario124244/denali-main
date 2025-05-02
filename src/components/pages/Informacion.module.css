@@ -26,14 +26,7 @@ body.informacion-body{
 
 
 /* Curva solo desde area2 en adelante */
-.area2,
-.area3,
 
-{
-  border-top-left-radius: 100% 80px;
-  border-top-right-radius: 100% 80px;
-  margin-top: -40px;
-}
 
 /* Colores por sección */
 .area1 { background-color: #9CDACE; }
@@ -42,8 +35,8 @@ body.informacion-body{
 .area4 { background-color:rgb(255, 255, 255); }
 .area5 { background-color: #7066C2; }
 .area6 { background-color:#FDE262; }
-.area7 { background-color: #ADC7EF; }
-.area8 { background-color: #F3A2B5; }
+.area7 { background-color: #F3A2B5; }
+.area8 { background-color: #9CDACE; }
 .area9 { background-color: #FDE262; }
 
 
