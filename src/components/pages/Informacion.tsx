@@ -1,8 +1,31 @@
 import React, { useEffect } from 'react';
+import { useInView } from 'react-intersection-observer';
 import NomNomGallery from '../galeria2/galeria';
 import styles from './Informacion.module.css';
 import LoadingScreen from '../titulos/tituloGaleria';
 import CloudSeparator from '../separadores/separadorUno';
+
+// Componente para títulos animados
+const AnimatedTitle = ({ children }: { children: React.ReactNode }) => {
+  const [ref, inView] = useInView({
+    triggerOnce: true,
+    threshold: 0.2,
+  });
+  
+
+  return (
+    <h1 
+      ref={ref}
+      className={styles.animatedTitle}
+      style={{
+        animation: inView ? 'slideInTitle 1s ease-out forwards' : 'none',
+        opacity: inView ? 1 : 0
+      }}
+    >
+      {children}
+    </h1>
+  );
+};
 
 const Informacion: React.FC = () => {
   useEffect(() => {
@@ -11,6 +34,11 @@ const Informacion: React.FC = () => {
       document.body.classList.remove('informacion-body');
     };
   }, []);
+  const [loadingRef, loadingInView] = useInView({
+    triggerOnce: true,
+    threshold: 0.2,
+    rootMargin: '-50px 0px'
+  });
 
   return (
     <div className={styles.container2}>
@@ -22,7 +50,7 @@ const Informacion: React.FC = () => {
           />
         </div>
         <div className={styles.texto}>
-          <h1>Informacio GeneraL</h1>
+          <AnimatedTitle>Información General</AnimatedTitle>
           <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum quos quae
             maxime voluptas optio, expedita id quas consequatur corrupti earum nemo
@@ -32,16 +60,17 @@ const Informacion: React.FC = () => {
             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fugiat atque alias
             tenetur reiciendis nulla? Repellat, optio maxime! Odit soluta, autem mollitia
             eius quod doloribus. Vitae deleniti aliquam tempora consequatur voluptates.
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nisi ratione sed mollitia quisquam dicta provident voluptates quaerat! Ullam vero dolor porro fugiat! Harum atque sequi voluptatibus ipsa! Sequi, quasi autem?
           </p>
         </div>
       </div>
+      
       <div className={styles.area8}>
         <CloudSeparator color='#F3A2B5'/>
-        </div>
+      </div>
+
       <div className={styles.area2}>
         <div className={styles.texto}>
-          <h1>NOMBRE DE TERAPEUTA</h1>
+          <AnimatedTitle>Nombre de Terapeuta</AnimatedTitle>
           <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum quos quae
             maxime voluptas optio, expedita id quas consequatur corrupti earum nemo
@@ -51,7 +80,6 @@ const Informacion: React.FC = () => {
             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fugiat atque alias
             tenetur reiciendis nulla? Repellat, optio maxime! Odit soluta, autem mollitia
             eius quod doloribus. Vitae deleniti aliquam tempora consequatur voluptates.
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. A ipsam, eaque saepe rem recusandae pariatur, magnam eius optio temporibus veniam assumenda autem eos animi nisi nihil repudiandae commodi eum laudantium?
           </p>
         </div>
         <div className={styles.imagen}>
@@ -60,29 +88,27 @@ const Informacion: React.FC = () => {
             alt="Terapeuta2"
           />
         </div>
-        
       </div>
+
       <div className={styles.area7}>
         <CloudSeparator color='#FDE262'/>
-        </div>
-      
+      </div>
+
       <div className={styles.area3}>
-        
         <div className={styles.imagen}>
-        <div className={styles.marcoDecorativo}>
-          <img
-            src={`${process.env.PUBLIC_URL}/img/terapeuta3.jpg`}
-            alt="Terpeuta3"
-          />
+          <div className={styles.marcoDecorativo}>
+            <img
+              src={`${process.env.PUBLIC_URL}/img/terapeuta3.jpg`}
+              alt="Terapeuta3"
+            />
           </div>
         </div>
         <div className={styles.texto}>
-          <h1>NOMBRE DE TERAPEUTA</h1>
+          <AnimatedTitle>Nombre de Terapeuta</AnimatedTitle>
           <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum quos quae
             maxime voluptas optio, expedita id quas consequatur corrupti earum nemo
             voluptatem sint dolor nihil dicta veritatis, distinctio sapiente omnis?
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae ipsum perspiciatis soluta dolore, consequatur dicta ratione nobis porro commodi laboriosam debitis distinctio pariatur quam incidunt a, sint ab ducimus! Quos!
           </p>
           <p>
             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fugiat atque alias
@@ -90,18 +116,17 @@ const Informacion: React.FC = () => {
             eius quod doloribus. Vitae deleniti aliquam tempora consequatur voluptates.
           </p>
         </div>
-        
-      
       </div>
-      
+
       <div className={styles.area6}>
         <CloudSeparator/>
+      </div>
+
+      <div ref={loadingRef} className={styles.area4}>
+        <div className={styles.subArea4}>
+          {loadingInView &&<LoadingScreen />}
         </div>
       
-     
-      
-      <div className={styles.area4}>
-        <LoadingScreen />
         <NomNomGallery />
       </div>
     </div>
