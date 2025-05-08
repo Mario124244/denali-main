@@ -5,7 +5,7 @@ import styles from './tituloGaleria.module.css';
 const LoadingScreen: React.FC = () => {
   const [ref, inView] = useInView({
     triggerOnce: true,
-    threshold: 0.5,
+    threshold: 0.1,
     rootMargin: '-50px 0px'
   });
 

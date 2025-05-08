@@ -55,7 +55,7 @@ const Inicio: React.FC = () => {
           ))}
         </Carousel>
 
-
+          
         </div>
 
         

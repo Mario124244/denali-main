@@ -383,7 +383,7 @@ const AgendarCita: React.FC = () => {
     {horariosDisponibles.map((hora) => {
     const citasEnEsaHora = citasGrupo.filter(c => c.hora === hora);
   
-    // Usamos una sola declaración ✅
+    // Usamos una sola declaración 
     const citasMismoGrupo = citasEnEsaHora.filter(c => c.grupo?.nombre === form.grupo);
     const gruposEnEsaHora = citasEnEsaHora.map(c => c.grupo?.nombre).filter((v, i, a) => a.indexOf(v) === i);
     const usuariosEnMismoGrupo = citasMismoGrupo.map(c => c.usuario).filter((v, i, a) => a.indexOf(v) === i);

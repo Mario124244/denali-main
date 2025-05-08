@@ -244,6 +244,7 @@ body.about-body {
       "titulo1"
       "imagen";
     text-align: center;
+    
   }
 
   .titulo1 {
@@ -252,8 +253,9 @@ body.about-body {
 
   .imagen img {
     height: 300px;
-    margin-bottom: 0;
+    
     transform: none;
+    margin-button:20px;
   }
 
   .dos {
@@ -261,8 +263,11 @@ body.about-body {
     grid-template-areas:
       "sub1"
       "sub2";
-    border-top-left-radius: 50% 40px;
-    border-top-right-radius: 50% 40px;
+    border-top-left-radius: 50% 30px;
+    border-top-right-radius: 50% 30px;
+    
+    width:100%;
+
   }
 }
 
@@ -278,6 +283,17 @@ body.about-body {
   .titulo1 p {
     font-size: 1rem;
   }
+  .dos {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "sub1"
+      "sub2";
+    border-top-left-radius: 10% 30px;
+    border-top-right-radius: 10% 30px;
+    width:100%;
+
+  }
+  
 }
 
 @media (max-width: 480px) {

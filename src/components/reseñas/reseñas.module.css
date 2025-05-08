@@ -1,0 +1,149 @@
+/* Contenedor principal */
+.reviews-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  /* Carrusel */
+  .reviews-carousel {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+  }
+  
+  .carousel-inner {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+  }
+  
+  .carousel-item {
+    min-width: 100%;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+  }
+  
+  .carousel-item.active {
+    opacity: 1;
+  }
+  
+  /* Tarjeta de reseña */
+  .review-card {
+    background: #f8f9fa;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    margin: 0 15px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  }
+  
+  .review-image {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 15px;
+  }
+  
+  .review-text {
+    font-size: 1.1rem;
+    color: #333;
+    margin-bottom: 15px;
+  }
+  
+  /* Controles del carrusel */
+  .carousel-control {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0,0,0,0.5);
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 50%;
+    font-size: 1.5rem;
+  }
+  
+  .carousel-control.prev {
+    left: 10px;
+  }
+  
+  .carousel-control.next {
+    right: 10px;
+  }
+  
+  /* Sistema de rating */
+  .rating-stars, .rating-input {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+  }
+  
+  .star {
+    cursor: pointer;
+    color: #ccc;
+    font-size: 1.5rem;
+    transition: color 0.2s;
+  }
+  
+  .star.filled {
+    color: #ff9933;
+  }
+  
+  .rating-input .star {
+    cursor: pointer;
+  }
+  
+  .rating-stars input, .rating-input input {
+    display: none;
+  }
+  
+  /* Formulario */
+  .review-form-container {
+    margin-top: 30px;
+  }
+  
+  .review-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .review-textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    min-height: 100px;
+    resize: vertical;
+  }
+  
+  .submit-button {
+    align-self: flex-start;
+    background: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  
+  .submit-button:hover {
+    background: #0056b3;
+  }
+  
+  @media (max-width: 768px) {
+    .reviews-container {
+      padding: 10px;
+    }
+    
+    .review-card {
+      margin: 0 5px;
+      padding: 15px;
+    }
+    
+    .carousel-control {
+      padding: 8px 12px;
+      font-size: 1.2rem;
+    }
+  }

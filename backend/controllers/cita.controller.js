@@ -75,7 +75,7 @@ const crearCita = async (req, res) => {
   }
 };
 
-// ✅ Obtener citas del usuario (grupo y servicio)
+// Obtener citas del usuario (grupo y servicio)
 const obtenerCitas = async (req, res) => {
   try {
     const citas = await Cita.find({ usuario: req.usuario.id })
@@ -235,7 +235,7 @@ const obtenerCitasAdmin = async (req, res) => {
       .populate('paciente', 'nombre correo')
       .populate('usuario', 'nombre correo')
       .select('fecha hora terapeuta estado paciente usuario tipo');
-      console.log("Citas con paciente poblado:", citas[0]?.paciente); // 👈
+      console.log("Citas con paciente poblado:", citas[0]?.paciente); // 
     res.status(200).json(citas);
   } catch (error) {
     console.error("Error real en /admin/citas:", error); // 👈 AGREGA ESTO
