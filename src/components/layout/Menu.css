@@ -57,7 +57,7 @@
 .nav-links {
   list-style: none;
   display: flex;
-  gap: 40px;
+  
   margin: 0;
   padding: 0;
 }
@@ -309,8 +309,8 @@
   display: none;
   flex-direction: column;
   position: absolute;
-  top: 100px; /* distancia desde el top */
-  right: 16px;
+   /* distancia desde el top */
+  right: 10px;
   background: #fff;
   width: 150px;
   border-radius: 12px;
