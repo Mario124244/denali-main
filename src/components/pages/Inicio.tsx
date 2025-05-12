@@ -36,7 +36,9 @@ const Inicio: React.FC = () => {
   <div className="container2">
     <div className="parte2">
       <h1>Inicio</h1>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit...</p>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit...
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic iste ipsam pariatur id, dolorum, corporis unde quaerat reiciendis obcaecati magni ratione, tempore fugiat porro. Ipsum corporis cum itaque repudiandae facere.
+      </p>
     </div>
 
     <div className="carrousel1">

@@ -53,10 +53,14 @@ body.inicio-body {
   background-color: #fca5a5 !important;
 }
 
-  .parte2{
-    grid-row-start: 1;
-    grid-column-start: 2;
-  }
+  .parte2 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center; /* centra texto dentro */
+  width: 70%;
+}
+
   .container2 {
     width: 50vw;                 /* Ocupa la mitad de la pantalla */
     height: 120vh;               /* Alto completo de la pantalla */
@@ -121,13 +125,7 @@ body.inicio-body {
     background-color: #FEF7F0;
   }
 
-  .container2 {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 0.5rem 0.5rem;
-    gap: 1rem;
-  }
+  
 
   .carrousel1 {
     order: 1;
@@ -187,14 +185,7 @@ body.inicio-body {
     
   }
 
-  .container2 {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 16px;
-    gap: 20px;
-  }
-
+  
   .carrousel1,
   .parte2 {
     width: 100%;
@@ -231,15 +222,24 @@ body.inicio-body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 2rem 0;
-    gap: 1.5rem;
+    padding: rem 0;
+    gap: 1rem;
   }
+  .parte2 h1 {
+  margin-bottom: 0.5rem; /* 🔽 reduce espacio */
+}
+
+.parte2 p {
+  margin-top: 0.5;         /* elimina espacio extra arriba */
+  line-height: 1.5;      /* mejora legibilidad sin expandir mucho */
+}
+
 
   .container2 {
     position: relative;        /* ✅ Deja de ser absoluta */
     width: 100%;               /* ✅ Ocupa todo el ancho */
     height: auto;
-    padding: 1rem;
+    padding-top: 7.5rem;
     display: flex;
     flex-direction: column;
     align-items: center;

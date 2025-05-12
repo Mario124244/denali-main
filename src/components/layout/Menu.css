@@ -205,10 +205,24 @@
 
 /* 📱 Responsive - Tablets */
 @media (max-width: 768px) {
+ .container2{
+  padding-top: 80px;
+ }
   .menu-icon {
-    display: block;
-    color: #f56c6c;
-  }
+  display: block;
+  font-size: 24px;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+
+  position: fixed;      /* ✅ se mantiene visible */
+  top: 1rem;            /* ajusta según diseño */
+  right: 1rem;
+  z-index: 10000;       /* más alto que todo */
+}
+
 
   .nav-links {
     display: none;
@@ -241,14 +255,46 @@
 
 /* 📱 Responsive - Celulares */
 @media (max-width: 480px) {
-  .navbar {
-    flex-direction: column;
-    padding: 12px 16px;
-    border-radius: 20px;
-    gap: 10px;
-    width: 70%;
-    margin: 20px auto;
-  }
+
+  .menu-icon {
+  display: block;
+  font-size: 20px;
+  
+  margin: 10px ;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+
+      /* ✅ se mantiene visible */
+  top: 1rem;            /* ajusta según diseño */
+  right: 1rem;
+  z-index: 10000;       /* más alto que todo */
+}
+.menu-icon.scrolled {
+  background: #fef7f0;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+.navbar {
+  position: fixed;
+  top: 0;
+  padding: 12px 16px;
+  margin: 20px auto;
+  
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 10000;
+  background: #FEF7F0;
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
 
   .logo {
     font-size: 20px;
@@ -270,7 +316,7 @@
   border-radius: 12px;
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
   padding: 5px 0;
-  z-index: 1000;
+  z-index: 9999;
 }
 
 .nav-links.active {
