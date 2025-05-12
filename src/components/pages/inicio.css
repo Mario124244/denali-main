@@ -114,52 +114,71 @@ body.inicio-body {
 
 /* 🎯 Media query para móviles pequeños (menos de 480px) */
 @media (max-width: 480px) {
-  html, body {
+  body, html {
     font-size: 14px;
-    
+    margin: 0;
+    padding: 0;
+    background-color: #FEF7F0;
   }
 
   .container2 {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 16px;
-    gap: 20px;
+    padding: 0.5rem 0.5rem;
+    gap: 1rem;
   }
+
   .carrousel1 {
+    order: 1;
     width: 95%;
     max-width: 100%;
-    margin: 0 auto;
   }
 
-  .carousel1 .slide img {
-    max-height: 180px;
-    width: 100%;
-    object-fit: cover;
-  }
-  .parte2 {
-    width: 100%;
-    max-width: 95%;
-    text-align: center;
+  .carousel-slide {
+    border-radius: 10px;
+    margin: 0.5rem 0;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   }
 
-  .carousel1 .slide img {
+  .carousel-slide img {
     max-height: 180px;
-    width: 100%;
     object-fit: cover;
+    border-radius: 10px;
+  }
+
+  .section-container {
+    order: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 0;
+    width: 100%;
+  }
+
+  .section {
+    width: 90%;
+    max-width: 300px;
+    padding: 0.75rem;
+    border-radius: 14px;
+    font-size: 0.9rem;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+  }
+
+  .blinking-character img {
+    width: 45px;
   }
 
   .btn1 {
-    position: fixed;
-    left: -35px; /* Lo acercamos más */
-    top: 60%;
-    transform: rotate(-90deg) translateY(-50%);
-    transform-origin: left top;
     font-size: 0.7rem;
-    padding: 6px 14px;
-    border-radius: 16px;
+    left: -28px;
+    padding: 6px 12px;
+    border-radius: 14px;
   }
 }
+
+
 
 
 @media (max-width: 640px) {

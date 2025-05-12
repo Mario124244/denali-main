@@ -183,61 +183,34 @@ p.age {
 
 @media (max-width: 480px) {
   .section-container {
-    position: relative;
-    width: 100%;
-    height: auto;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 1rem 0;
-    gap: 1.5rem;
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+    padding: 1rem;
+    width: 80%;
+    justify-items: center;
   }
 
   .section {
-    width: 90%;
-    padding: 1rem;
-    border-radius: 40px;
-    clip-path: none;
-    height: auto;
-    margin: 0 auto;
-    font-size: 1rem;
-
+    width: 90% !important;
+    max-width: 100%;
+    padding: 0.75rem;
+    border-radius: 14px;
+    font-size: 0.85rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    position: relative;
-  }
-
-  .age {
-    font-size: 1.1rem;
-    margin: 0.5rem 0;
-    text-align: center;
-    color: #fff; /* o el color que prefieras */
-  }
-
-  .blinking-character {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 0.5rem;
   }
 
   .blinking-character img {
-    width: 60px;
+    width: 42px;
     height: auto;
   }
 
   .hover-text {
-    position: static;
-    transform: none;
-    background-color: transparent;
-    font-size: 0.85rem;
-    font-weight: 500;
-    color: #fff;
+    font-size: 0.75rem;
     text-align: center;
     margin-top: 0.3rem;
   }
 }
-

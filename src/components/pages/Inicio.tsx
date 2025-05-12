@@ -33,38 +33,35 @@ const Inicio: React.FC = () => {
 
   return (
     <>
-      <SectionDivider />
-      
-      <div className='container2'>
-      <div className='parte2'>
-          <h1>Inicio</h1>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit...</p>
-        </div>
-        <div className='carrousel1'>
-        <Carousel 
-            autoPlay 
-            infiniteLoop 
-            showThumbs={false} 
-            showStatus={false} 
-            showArrows={false} // 👈 esto quita las flechas
-          >
-          {tarjetas.map((tarjeta, index) => (
-            <div key={index} className="carousel-slide">
-              <img src={tarjeta.img} alt={`Imagen ${index + 1}`} />
-            </div>
-          ))}
-        </Carousel>
+  <div className="container2">
+    <div className="parte2">
+      <h1>Inicio</h1>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit...</p>
+    </div>
 
-          
-        </div>
+    <div className="carrousel1">
+      <Carousel 
+        autoPlay 
+        infiniteLoop 
+        showThumbs={false} 
+        showStatus={false} 
+        showArrows={false}
+      >
+        {tarjetas.map((tarjeta, index) => (
+          <div key={index} className="carousel-slide">
+            <img src={tarjeta.img} alt={`Imagen ${index + 1}`} />
+          </div>
+        ))}
+      </Carousel>
+    </div>
+  </div>
 
-        
+  {/* 🔽 Tarjetas se renderizan aquí */}
+  <SectionDivider />
 
-        <div className="side-button">
-          {/* Botón lateral si lo necesitas */}
-        </div>
-      </div>
-    </>
+  <div className="side-button">{/* tu botón */}</div>
+</>
+
   );
 };
 
