@@ -315,8 +315,19 @@
   width: 150px;
   border-radius: 12px;
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
-  padding: 5px 0;
+  padding: 3px 0;
   z-index: 9999;
+  max-height: 70vh;       /* evita que se pase de la pantalla */
+  overflow-y: auto;       /* activa el scroll vertical */
+  overflow-x: hidden;  
+}
+.nav-links::-webkit-scrollbar {
+  width: 6px;
+}
+
+.nav-links::-webkit-scrollbar-thumb {
+  background-color: #fca5a5;
+  border-radius: 10px;
 }
 
 .nav-links.active {

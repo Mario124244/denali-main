@@ -7,6 +7,7 @@ body.informacion-body{
   display: flex;
   flex-direction: column;
   width: 100%;
+  padding-top: 80px;
 }
 /* Estilo base para TODAS las áreas */
 .area1, .area2, .area3{
