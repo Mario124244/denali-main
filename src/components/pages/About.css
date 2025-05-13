@@ -10,12 +10,18 @@
   font-weight: normal;
   font-style: normal;
 }
+html, body {
+  overflow-x: hidden;
+  max-width: 100%;
+}
+  
 
 body.about-body {
   background-color: #8ab3fc;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  
 }
 
 .container {
@@ -91,7 +97,7 @@ body.about-body {
   border-top-left-radius: 100% 80px;
   border-top-right-radius: 100% 80px;
   margin-top: -70px;
-  width: 100vw;
+  width: 100%;
   max-width: 100%;
   margin-left: 0;
   margin-right: 0;
@@ -272,8 +278,22 @@ body.about-body {
 }
 
 @media (max-width: 768px) {
-  .tarjetas-grid {
-    grid-template-columns: repeat(2, 1fr);
+  .container {
+    padding: 1rem;
+  }
+
+  .uno {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "titulo1"
+      "imagen";
+    padding: 1rem;
+    gap: 1.5rem;
+  }
+
+  .titulo1 {
+    margin-bottom: 2rem;
+    padding: 0 1rem;
   }
 
   .titulo1 h1 {
@@ -283,37 +303,155 @@ body.about-body {
   .titulo1 p {
     font-size: 1rem;
   }
+
+  .imagen {
+    justify-content: center;
+  }
+
+  .imagen img {
+    height: 280px;
+    transform: none;
+    margin-bottom: 1.5rem;
+  }
+
   .dos {
     grid-template-columns: 1fr;
     grid-template-areas:
       "sub1"
       "sub2";
-    border-top-left-radius: 10% 30px;
-    border-top-right-radius: 10% 30px;
-    width:100%;
-
-  }
-  
-}
-
-@media (max-width: 480px) {
-  .tarjetas-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .titulo1 h1 {
-    font-size: 1.8rem;
-  }
-
-  .imagen img {
-    height: 250px;
-  }
-
-  .dos {
-    padding: 1rem;
+    padding: 2rem 1rem;
+    border-top-left-radius: 15% 30px;
+    border-top-right-radius: 15% 30px;
+    margin-top: -50px;
+    width: 100%;
   }
 
   .sub1, .sub2 {
     padding: 1rem;
+  }
+
+  .subtitulo {
+    font-size: 1.5rem;
+  }
+
+  .tarjetas-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  .tarjeta h3 {
+    font-size: 1rem;
+  }
+
+  .tarjeta p {
+    font-size: 0.9rem;
+  }
+
+  .modal-contenido {
+    padding: 1.5rem;
+  }
+
+  .modal-contenido h2 {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+  --navbar-height: 90px;
+  }
+  .container {
+    padding: 0.5rem;
+  }
+
+  .uno {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem 0.5rem;
+    gap: 1rem;
+    padding-top: var(--navbar-height);
+  }
+
+  .titulo1 {
+    margin-bottom: 1rem;
+    padding: 0 0.5rem;
+  }
+
+  .titulo1 h1 {
+    font-size: 1.4rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .titulo1 p {
+    font-size: 0.9rem;
+  }
+
+  .imagen img {
+    height: auto;
+    width: 80%;
+    max-width: 250px;
+    transform: none;
+    margin-bottom: 1rem;
+  }
+
+  .dos {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "sub1"
+      "sub2";
+    padding: 1rem 0.5rem;
+    border-top-left-radius: 8% 20px;
+    border-top-right-radius: 8% 20px;
+    margin-top: -40px;
+    width: 100%;
+  }
+
+  .sub1, .sub2 {
+    padding: 0.8rem;
+  }
+
+  .subtitulo {
+    font-size: 1.2rem;
+  }
+
+  .tarjetas-grid {
+    grid-template-columns: 1fr;
+    gap: 0.8rem;
+    padding: 0.5rem 0;
+  }
+
+  .tarjeta {
+    padding: 0.8rem;
+  }
+
+  .tarjeta img {
+    width: 70px;
+    margin-bottom: 0.5rem;
+  }
+
+  .tarjeta h3 {
+    font-size: 0.95rem;
+  }
+
+  .tarjeta p {
+    font-size: 0.8rem;
+  }
+
+  .modal-contenido {
+    padding: 1rem;
+    width: 95%;
+  }
+
+  .modal-contenido h2 {
+    font-size: 1.3rem;
+  }
+
+  .modal-img {
+    width: 70px;
+  }
+
+  .cerrar-modal {
+    font-size: 1.2rem;
   }
 }
